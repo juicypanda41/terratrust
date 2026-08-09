@@ -6,9 +6,10 @@ Source of truth for the hackathon interface. Generated from UI/UX Pro Max search
 
 - Product: responsible scientific decision-support tool.
 - Style: Swiss Modernism 2.0 × editorial field report.
-- Tone: measured, auditable, direct, human.
+- Tone: bare, strong, measured, human.
 - Avoid: gradients, glassmorphism, floating decoration, soft card grids, neon, oversized pill controls, fake maps, decorative AI motifs, and color-only states.
-- Geometry: 1px rules, 1px radius, no shadows. Circles are reserved for the decision-policy diagram and queue count.
+- Geometry: 1px rules, 1px radius, no shadows. Organic geometry is reserved for the hero's terrain contours; circles are reserved for the decision-policy diagram and queue count.
+- Homepage principle: lead with the product decision, not dataset names, sample counts, thresholds, hackathon labels, or model-development terminology. Detailed evidence remains one deliberate navigation step away.
 
 ## Tokens
 
@@ -20,6 +21,8 @@ Source of truth for the hackathon interface. Generated from UI/UX Pro Max search
 | Muted | `#5C6157` | Secondary copy; verify 4.5:1 at body sizes |
 | Field green | `#155F3E` | Primary accent and accepted state |
 | Field green dark | `#0F4B31` | High-contrast green text/action |
+| Field green bright | `#58B783` | Dark-hero contour and focus detail |
+| Ink muted | `#C4C8BD` | Secondary copy on the dark hero |
 | Review amber | `#9D5212` | Review state, always paired with icon and text |
 | Error | `#A12B24` | Recoverable errors, paired with explanation |
 | White | `#FFFEFA` | Text on dark actions and image stage |
@@ -30,8 +33,9 @@ Spacing follows an 8px base: 8 / 16 / 24 / 32 / 48 / 64 / 96. Desktop content is
 
 ## Components
 
-- Header: wordmark, four labeled destinations, active underline, track label.
-- Metrics: a ruled ledger, not detached cards.
+- Header: wordmark, four labeled destinations, active underline. No event or system-status label.
+- Hero: near-black field, oversized statement, restrained contour SVG, one inverse CTA, and a plain-language two-outcome policy.
+- Homepage proof: product flow only. Benchmarks and methodology live under Evidence.
 - Buttons: rectangular, 48px minimum height, single primary action per view.
 - Status: icon + text + accessible color; green means eligible, amber means review.
 - Charts: direct values and text alternatives; green lines/bars, amber target markers; no gradients.
@@ -41,7 +45,7 @@ Spacing follows an 8px base: 8 / 16 / 24 / 32 / 48 / 64 / 96. Desktop content is
 ## Motion
 
 - Framer Motion `LazyMotion` with `domAnimation`; never import `motion`.
-- Only view transitions, result entry/exit, queue entry/exit, and press feedback.
+- Only view transitions, one hero contour entrance, result/queue entry/exit, and press feedback.
 - Transform and opacity only, 140–240ms, stable variants outside components.
 - Honor system reduced-motion preferences through `MotionConfig` and CSS.
 
@@ -50,7 +54,7 @@ Spacing follows an 8px base: 8 / 16 / 24 / 32 / 48 / 64 / 96. Desktop content is
 - 1440px: editorial asymmetric grid.
 - 1024px: analysis result moves below input/image pair.
 - 768px: navigation becomes a labeled horizontal strip; all main grids become one column.
-- 375px: metrics become a one-column ledger and charts/tables remain readable without page-level horizontal scroll.
+- 375px: the contour crops rather than shrinking into noise; charts/tables remain readable without page-level horizontal scroll.
 
 ## Evidence and rubric intent
 

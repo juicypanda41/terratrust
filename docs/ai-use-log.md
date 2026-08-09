@@ -8,6 +8,7 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 |---|---|---|---|---|---|---|
 | 2026-08-09 | OpenAI Codex | Project strategy, repository scaffold, application code, tests, and documentation | Accelerate implementation and rubric coverage | Team must assign | Measure after team review | Entry 1 |
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance + 21st CLI | React/FastAPI interface redesign and review | Create a restrained, accessible, demo-ready interface | Team must assign | 0 errors / 0 warnings in 21st strict review; 12 automated tests after redesign | Entry 2 |
+| 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance | Homepage simplification and contour-field art direction | Replace evaluation-first presentation with a stronger product-first brand experience | Team must assign | Benchmark strip and event/dataset/model jargon removed from primary flow; build and responsive QA rerun | Entry 3 |
 
 ## Entry 1
 
@@ -43,6 +44,21 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **21st boundary:** 21st AI sketch generation was attempted but the CLI had no authenticated account, and the browser login did not complete. No generated 21st take is claimed. The installed 21st deterministic local reviewer was used successfully.
 - **Limitations/risks:** Automated accessibility and visual review cannot replace real user testing, assistive-technology testing, or judging. The React production bundle is larger than the former Python-only presentation; its animation features are lazy-scoped and the measured model latency is unchanged.
 - **Artifact or commit link:** Add final GitHub repository and redesign commit after publishing.
+
+## Entry 3
+
+- **Date/time:** 2026-08-09
+- **Tools:** OpenAI Codex; UI/UX Pro Max local design database; Framer Motion performance guidance.
+- **Component/element changed:** Homepage story, header/footer labels, screening microcopy, public-facing limitation language, and a code-native SVG contour background.
+- **Representative detailed prompt:**
+
+  > Remove internal evaluation language, dataset branding, image counts, event labels, and model-input jargon that would not lead a professional product website. Keep the interface bare but strong and creative. Add one dynamic background that fits responsible land screening without making the page busy or overdesigned. Preserve the evidence destination and honest operational safeguards.
+
+- **Human-directed design decisions:** The user requested less visible research terminology and a stronger, more professional personality without overdoing it.
+- **Output used:** `frontend/src/App.jsx`, `frontend/src/styles.css`, and `design-system/terratrust/MASTER.md`.
+- **Validation performed:** UI/UX Pro Max style, React, motion, accessibility, and performance searches; Framer Motion bundle/variant/transform guidance; frontend production build and test; complete Python test suite; desktop and responsive browser inspection.
+- **Measured outcome:** Removed the homepage benchmark ledger, sample count, dataset name, threshold explanation, event track label, and model-input size language. The homepage now has one dark contour field, one primary action, and a plain-language two-outcome workflow. No new image asset, font request, canvas runtime, gradient, or continuous animation was added.
+- **Limitations:** “Professional” is a qualitative judgment. Final acceptance still requires real participant and team review; the evidence view intentionally retains technical performance material needed for responsible disclosure and judging.
 
 ## Where AI was not used
 

@@ -9,7 +9,6 @@ import {
   ImagePlus,
   LoaderCircle,
   ScanSearch,
-  ShieldCheck,
   X,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -32,6 +31,18 @@ const resultVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.22, ease: "easeOut" } },
   exit: { opacity: 0, transition: { duration: 0.12 } },
 };
+
+const terrainVariants = {
+  hidden: { opacity: 0, scale: 1.04, x: 18 },
+  visible: { opacity: 1, scale: 1, x: 0, transition: { duration: 0.38, ease: "easeOut" } },
+};
+
+const PUBLIC_LIMITATIONS = [
+  "Classifies whole scenes, not exact boundaries or area.",
+  "Assesses one image at a time; it does not claim to detect change.",
+  "Current evaluation is regional and requires local validation before deployment.",
+  "Confidence guides review; it never guarantees correctness.",
+];
 
 const pct = (value, digits = 1) => `${(Number(value) * 100).toFixed(digits)}%`;
 
@@ -152,7 +163,7 @@ function App() {
       <main id="main-content" className="page-frame" tabIndex="-1">
         <AnimatePresence mode="wait" initial={false}>
           <m.div key={activeView} variants={viewVariants} initial="hidden" animate="visible" exit="exit">
-            {activeView === "briefing" && <Briefing metrics={data.metrics} onStart={() => selectView("screen")} />}
+            {activeView === "briefing" && <Briefing onStart={() => selectView("screen")} />}
             {activeView === "screen" && (
               <ScreenTile
                 demos={featuredDemos}
@@ -175,8 +186,8 @@ function App() {
         </AnimatePresence>
       </main>
       <footer className="site-footer">
-        <span>TerraTrust / Technical Track / OurPlanet.Rocks 2026</span>
-        <span>Research prototype — not a GIS or field-survey replacement</span>
+        <span>TerraTrust / Responsible land screening</span>
+        <span>Built for decisions that deserve a second look</span>
       </footer>
     </div>
   );
@@ -203,71 +214,56 @@ function Header({ activeView, queueCount, onNavigate }) {
           </button>
         ))}
       </nav>
-      <div className="track-label">Technical track</div>
     </header>
   );
 }
 
-function Briefing({ metrics, onStart }) {
-  const metricRows = [
-    ["Accepted-case accuracy", pct(metrics.selective_accuracy), "Held-out test set"],
-    ["Auto-accepted", pct(metrics.coverage), "Full decision policy"],
-    ["Sent to review", pct(metrics.review_rate), "Confidence or quality flag"],
-    ["Calibration error", pct(metrics.ece_after, 2), "After temperature scaling"],
-  ];
+function Briefing({ onStart }) {
   return (
     <>
       <section className="hero-grid" aria-labelledby="hero-heading">
+        <TerrainField />
         <div className="hero-copy">
-          <p className="kicker">Land-cover triage / Sentinel-2 Europe</p>
+          <p className="kicker">Earth observation / Human review</p>
           <h1 id="hero-heading">Know what to trust.<br />Know what to review.</h1>
           <p className="hero-summary">
-            TerraTrust screens satellite scenes and stops when confidence or image quality is not good enough.
-            The result is a decision workflow, not a claim of certainty.
+            TerraTrust moves clear land-cover signals forward and pauses uncertain ones for a person.
+            No forced answers. No hidden handoffs.
           </p>
           <m.button className="primary-action" onClick={onStart} whileTap={{ scale: 0.98 }}>
             Screen a tile <ArrowRight size={18} aria-hidden="true" />
           </m.button>
         </div>
         <aside className="policy-plate" aria-label="Decision policy">
-          <div className="plate-index">POLICY / 01</div>
+          <div className="plate-index">THE FLOW / 01</div>
           <div className="policy-diagram" aria-hidden="true">
             <span className="policy-node solid" />
             <span className="policy-line" />
             <span className="policy-node" />
           </div>
-          <h2>Accept only when two checks agree.</h2>
+          <h2>Two outcomes.<br />One accountable flow.</h2>
           <ol>
-            <li><span>01</span> Calibrated confidence is at least {pct(metrics.threshold, 0)}.</li>
-            <li><span>02</span> The validation-trained quality guard is clear.</li>
+            <li><span>01</span> Clear enough to continue.</li>
+            <li><span>02</span> Uncertain or unfamiliar goes to review.</li>
           </ol>
-          <p>Otherwise, route the scene to a person with the reason attached.</p>
+          <p>Every handoff keeps the reason attached.</p>
         </aside>
-      </section>
-
-      <section className="metric-ledger" aria-label="Evaluated results">
-        {metricRows.map(([label, value, note]) => (
-          <div className="ledger-item" key={label}>
-            <span>{label}</span>
-            <strong>{value}</strong>
-            <small>{note}</small>
-          </div>
-        ))}
       </section>
 
       <section className="principle-grid">
         <div>
-          <p className="section-index">WHY / 02</p>
-          <h2>Uncertainty should change what happens next.</h2>
+          <p className="section-index">HOW IT WORKS / 02</p>
+          <h2>One useful answer—or a clear stop.</h2>
         </div>
         <div className="principle-copy">
           <p>
-            A conventional classifier returns a label every time. TerraTrust turns measured uncertainty into an
-            operational choice: continue automatically or request human judgment.
+            Most tools are built to answer. TerraTrust is also built to pause. That makes uncertainty useful:
+            it changes the next action instead of becoming another number on a screen.
           </p>
-          <div className="scope-line">
-            <ShieldCheck size={20} aria-hidden="true" />
-            <span><strong>{metrics.test_count.toLocaleString()}</strong> held-out tiles / <strong>{Object.keys(metrics.per_class).length}</strong> classes / <strong>{metrics.inference_latency_ms.median.toFixed(1)} ms</strong> median local inference</span>
+          <div className="flow-rail" aria-label="Screen, assess, route">
+            <span><b>01</b> Screen</span><ArrowRight size={16} aria-hidden="true" />
+            <span><b>02</b> Assess</span><ArrowRight size={16} aria-hidden="true" />
+            <span><b>03</b> Route</span>
           </div>
         </div>
       </section>
@@ -275,21 +271,49 @@ function Briefing({ metrics, onStart }) {
   );
 }
 
+function TerrainField() {
+  return (
+    <m.svg
+      className="terrain-field"
+      viewBox="0 0 1200 720"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+      focusable="false"
+      variants={terrainVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <g className="terrain-grid">
+        <path d="M720 -40V760M840 -40V760M960 -40V760M1080 -40V760" />
+        <path d="M600 120H1240M600 240H1240M600 360H1240M600 480H1240M600 600H1240" />
+      </g>
+      <g className="terrain-contours">
+        <path d="M1260 14C1025-72 780 24 764 211c-18 210 222 240 211 393-8 112-112 177-223 191" />
+        <path d="M1268 72c-204-75-416 8-430 166-14 173 189 204 179 342-8 105-99 167-197 184" />
+        <path d="M1278 134c-172-64-350 4-360 134-10 139 156 170 147 289-7 94-82 146-162 163" />
+        <path d="M1282 195c-139-52-282 0-288 104-7 106 122 138 114 235-6 77-64 119-127 136" />
+        <path d="M1288 257c-105-40-210-3-214 73-4 77 87 108 80 181-5 59-47 90-91 105" />
+        <path d="M1293 318c-70-28-138-5-140 44-2 49 53 79 47 129-4 39-28 59-57 72" />
+      </g>
+    </m.svg>
+  );
+}
+
 function ScreenTile({ demos, selectedDemo, uploadedFile, previewUrl, fileInput, result, analyzing, error, onChooseDemo, onChooseUpload, onAnalyze, onQueue }) {
   const imageSource = selectedDemo?.image_url || previewUrl;
-  const imageAlt = selectedDemo ? `${selectedDemo.story}, held-out EuroSAT tile labeled ${selectedDemo.display_label}` : `Uploaded tile ${uploadedFile?.name || ""}`;
+  const imageAlt = selectedDemo ? `${selectedDemo.story}, reference scene labeled ${selectedDemo.display_label}` : `Uploaded scene ${uploadedFile?.name || ""}`;
   return (
     <section aria-labelledby="screen-heading">
-      <PageIntro index="02" eyebrow="Operational demo" title="Screen one scene." description="Use a held-out sample or upload an RGB image. Uploaded imagery outside EuroSAT's scope is automatically treated as unvalidated input." />
+      <PageIntro index="02" eyebrow="Operational demo" title="Screen one scene." description="Choose a reference scene or upload an RGB image. New imagery stays in review until its source is verified." />
       <div className="screen-layout">
         <div className="input-column">
           <fieldset className="demo-selector">
-            <legend>Choose a held-out example</legend>
+            <legend>Choose a reference scene</legend>
             {demos.map((demo, index) => (
               <button key={demo.file} className={selectedDemo?.file === demo.file ? "demo-row selected" : "demo-row"} onClick={() => onChooseDemo(demo)} aria-pressed={selectedDemo?.file === demo.file}>
                 <span>0{index + 1}</span>
                 <img src={demo.image_url} width="64" height="64" alt="" />
-                <span><strong>{demo.story}</strong><small>Ground truth: {demo.display_label}</small></span>
+                <span><strong>{demo.story}</strong><small>Reference: {demo.display_label}</small></span>
                 <ChevronRight size={18} aria-hidden="true" />
               </button>
             ))}
@@ -299,14 +323,14 @@ function ScreenTile({ demos, selectedDemo, uploadedFile, previewUrl, fileInput, 
             <button className="secondary-action" onClick={() => fileInput.current?.click()}>
               <ImagePlus size={18} aria-hidden="true" /> {uploadedFile ? "Choose another image" : "Upload an RGB image"}
             </button>
-            <p>JPEG, PNG, or WebP / maximum 10 MB / resized to 64×64 for inference</p>
+            <p>JPEG, PNG, or WebP / maximum 10 MB</p>
           </div>
         </div>
 
         <div className="analysis-stage">
           <div className="image-stage">
             {imageSource ? <img src={imageSource} width="512" height="512" alt={imageAlt} /> : <div className="empty-image"><ScanSearch aria-hidden="true" /><span>No tile selected</span></div>}
-            <div className="image-caption"><span>{selectedDemo?.file || uploadedFile?.name || "Awaiting input"}</span><span>RGB / 64×64 model input</span></div>
+            <div className="image-caption"><span>{selectedDemo?.file || uploadedFile?.name || "Awaiting input"}</span><span>Analysis frame</span></div>
           </div>
           <m.button className="primary-action full" onClick={onAnalyze} disabled={analyzing || !imageSource} whileTap={{ scale: 0.99 }}>
             {analyzing ? <><LoaderCircle className="spin" size={18} aria-hidden="true" /> Screening…</> : <><ScanSearch size={18} aria-hidden="true" /> Run screening</>}
@@ -372,7 +396,7 @@ function ReviewQueue({ items, onScreen, onRemove }) {
         <div className="queue-empty">
           <FileCheck2 size={28} aria-hidden="true" />
           <h2>No scenes are waiting.</h2>
-          <p>Run the ambiguous held-out example to exercise the handoff.</p>
+          <p>Run the ambiguous reference scene to exercise the handoff.</p>
           <button className="secondary-action" onClick={onScreen}>Go to screen tile <ArrowRight size={18} aria-hidden="true" /></button>
         </div>
       ) : (
@@ -399,7 +423,7 @@ function Evidence({ data }) {
   const target = metrics.target_selective_accuracy;
   return (
     <section aria-labelledby="evidence-heading">
-      <PageIntro index="04" eyebrow="Held-out evaluation" title="Evidence before claims." description="Every headline result comes from saved artifacts. Estimates, scope boundaries, and test limitations remain attached." />
+      <PageIntro index="04" eyebrow="Accountability" title="Proof, with limits." description="Performance, safeguards, and boundaries stay visible for anyone who wants to inspect them." />
       <div className="evidence-grid">
         <article className="evidence-block wide">
           <div className="block-heading"><span>Accuracy / coverage trade-off</span><span>Validation-selected threshold: {pct(metrics.threshold, 0)}</span></div>
@@ -407,7 +431,7 @@ function Evidence({ data }) {
           <p className="chart-note">Higher thresholds trade automation for accuracy. The selected policy also applies a separate image-quality check, so final coverage differs from confidence-only points.</p>
         </article>
         <article className="evidence-block">
-          <div className="block-heading"><span>Measured benchmark</span><span>{metrics.test_count.toLocaleString()} test tiles</span></div>
+          <div className="block-heading"><span>Measured benchmark</span><span>Independent evaluation</span></div>
           <div className="benchmark-list">
             <Benchmark label="Overall accuracy" value={metrics.accuracy} />
             <Benchmark label="Macro F1" value={metrics.macro_f1} />
@@ -438,7 +462,7 @@ function Evidence({ data }) {
             <p className="section-index">BOUNDARIES / 05</p>
             <h2>What TerraTrust does not claim.</h2>
           </div>
-          <ul>{metrics.limitations.map((limit) => <li key={limit}>{limit}</li>)}</ul>
+          <ul>{PUBLIC_LIMITATIONS.map((limit) => <li key={limit}>{limit}</li>)}</ul>
           <div className="sdg-note"><FlaskConical size={20} aria-hidden="true" /><p><strong>SDG 15.1 and 15.2 alignment:</strong> TerraTrust is an enabling screening workflow. The prototype measures reliability and review workload—not conservation, deforestation, acreage, carbon, or biodiversity outcomes.</p></div>
         </article>
       </div>
