@@ -10,11 +10,11 @@
 
 ## 0:35-1:25 - Product
 
-Show an easy held-out tile being accepted. Show an ambiguous tile being routed to the review queue. Explain the threshold in one sentence.
+Open **Screen tile**. Show the clear forest tile being accepted, then the ambiguous highway tile being routed to **Review queue**. Explain the two-check policy in one sentence.
 
 ## 1:25-1:55 - Evidence
 
-Show accepted-case accuracy, coverage, calibration change, worst-class recall, and the risk-coverage chart. State the test sample size.
+Open **Evidence**. Show accepted-case accuracy, coverage, calibration change, the risk-coverage curve, and the controlled stress-test table. State the 4,050-tile test sample size.
 
 ## 1:55-2:15 - SDG and impact
 
@@ -27,4 +27,3 @@ Explain future Sentinel-2 ingestion and spatial validation. State the current Eu
 ## 2:30-2:40 - Close
 
 “TerraTrust measures when AI is dependable, exposes when it is not, and directs human attention to the satellite images that need it most.”
-

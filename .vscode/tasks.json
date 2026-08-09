@@ -9,6 +9,23 @@
       "problemMatcher": []
     },
     {
+      "label": "TerraTrust: frontend install",
+      "type": "shell",
+      "command": "corepack",
+      "args": ["pnpm", "install"],
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "problemMatcher": []
+    },
+    {
+      "label": "TerraTrust: frontend build",
+      "type": "shell",
+      "command": "corepack",
+      "args": ["pnpm", "build"],
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "dependsOn": "TerraTrust: frontend install",
+      "problemMatcher": []
+    },
+    {
       "label": "TerraTrust: download EuroSAT RGB",
       "type": "shell",
       "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
@@ -27,6 +44,15 @@
       "type": "shell",
       "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
       "args": ["-m", "pytest"],
+      "problemMatcher": []
+    },
+    {
+      "label": "TerraTrust: frontend test",
+      "type": "shell",
+      "command": "corepack",
+      "args": ["pnpm", "test"],
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "dependsOn": "TerraTrust: frontend install",
       "problemMatcher": []
     },
     {
@@ -54,7 +80,8 @@
       "label": "TerraTrust: run app",
       "type": "shell",
       "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
-      "args": ["-m", "streamlit", "run", "app.py"],
+      "args": ["-m", "uvicorn", "api:app", "--host", "127.0.0.1", "--port", "8501"],
+      "dependsOn": "TerraTrust: frontend build",
       "isBackground": true,
       "problemMatcher": []
     }

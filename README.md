@@ -54,12 +54,25 @@ On a deterministic held-out EuroSAT RGB test set of 4,050 images:
    .\.venv\Scripts\python.exe scripts\train.py
    ```
 
-5. Run tests and the application:
+5. Install and build the React interface (Node.js 22+):
+
+   ```powershell
+   cd frontend
+   corepack enable
+   pnpm install
+   pnpm test
+   pnpm build
+   cd ..
+   ```
+
+6. Run tests and the application:
 
    ```powershell
    .\.venv\Scripts\python.exe -m pytest
-   .\.venv\Scripts\python.exe -m streamlit run app.py
+   .\.venv\Scripts\python.exe -m uvicorn api:app --host 127.0.0.1 --port 8501
    ```
+
+7. Open `http://localhost:8501`. For the fastest demo, choose **Screen tile**, select **Ambiguous scene**, run screening, and add the result to the review queue.
 
 VS Code tasks and debug configurations for these commands are included under `.vscode/`.
 
@@ -77,7 +90,8 @@ Calibration and threshold selection use validation data only. Final metrics use 
 ## Repository map
 
 ```text
-app.py                         Streamlit product and evidence dashboard
+api.py                         FastAPI model bridge and production web server
+frontend/                      React/Vite editorial interface and UI test
 src/terratrust/                Features, calibration, inference, configuration
 scripts/download_data.py       Official download plus checksum validation
 scripts/train.py               Reproducible train/validation/test evaluation
@@ -85,8 +99,11 @@ tests/                         Fast automated tests
 artifacts/                     Evaluated model and evidence outputs
 assets/demo_samples/           Small held-out demo set
 docs/                          Architecture, research, validation, demo, rubric
+design-system/terratrust/      Persisted UI source of truth
 MODEL_CARD.md                  Intended use and limitations
 ```
+
+The interface uses a restrained Swiss/editorial design system: warm paper, black rules, one field-green action color, and amber review states. Framer Motion is limited to short state transitions and respects reduced-motion preferences. The production bundle is served by FastAPI, so judges need one URL.
 
 ## Model approach
 

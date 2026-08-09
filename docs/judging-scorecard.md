@@ -32,14 +32,14 @@ Selected track: **Technical Track**. The current project specification is `docs/
 | Innovation & Impact | Specific problem and solution; multiple measurable metrics; documented baseline data plus credible research citations, user interviews, testing, benchmarks, or analysis showing targets are realistic | `artifacts/metrics.json`, `artifacts/robustness.csv`, `docs/research-sources.md`; real usability study still required | Team | [~] |
 | SDG Alignment | Cite specific UN SDG target numbers; explain the causal contribution; support measurable progress with research, data, or case studies; map project metrics to the targets | `docs/project-brief.md`, `docs/research-sources.md`; prototype metrics are enabling evidence, not SDG outcomes | Team | [~] |
 | Scalability | Phased plan with milestones; documented assumptions; projected reach per phase. Technical: infrastructure, performance projections, deployment. Organizational: funding and replication mechanisms | `docs/project-brief.md`, `docs/architecture.md`, `artifacts/metrics.json`; cost assumptions still required | Team | [~] |
-| Presentation Quality | Polished logical story; visuals improve understanding; smooth demo highlights core value; exact 2-3 minute timing; every team member contributes | `app.py`, `docs/demo-script.md`; final recording and timed team rehearsal still required | Team | [~] |
+| Presentation Quality | Polished logical story; visuals improve understanding; smooth demo highlights core value; exact 2-3 minute timing; every team member contributes | `frontend/`, `design-system/terratrust/MASTER.md`, `docs/design-review.md`, `docs/demo-script.md`; final recording and timed team rehearsal still required | Team | [~] |
 | Creative AI Use | Full disclosure of tools, components/elements created, representative detailed prompts, rationale, human validation, measurable outcomes, and where AI was not used and why | `docs/ai-use-log.md`; final human review/outcomes still required | Team | [~] |
 
 ### Technical Track: Technical Execution
 
 Internal 10 requires a polished, robust implementation; core flows work reliably; code is well organized; architecture and design rationale are documented; expected errors are handled; testing evidence exists; scalability is considered.
 
-Evidence/artifact link: `src/`, `scripts/`, `tests/`, `artifacts/`, `MODEL_CARD.md`, `docs/architecture.md`  
+Evidence/artifact link: `src/`, `api.py`, `frontend/`, `scripts/`, `tests/`, `artifacts/`, `MODEL_CARD.md`, `docs/architecture.md`, `docs/design-review.md`
 Owner: Team  
 Status: [x] implementation/evaluation; [ ] hosted-link verification
 

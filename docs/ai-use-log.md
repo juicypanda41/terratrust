@@ -7,6 +7,7 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 | Date/time | Tool/model | Component or artifact | Purpose | Human owner | Measurable outcome | Detailed entry |
 |---|---|---|---|---|---|---|
 | 2026-08-09 | OpenAI Codex | Project strategy, repository scaffold, application code, tests, and documentation | Accelerate implementation and rubric coverage | Team must assign | Measure after team review | Entry 1 |
+| 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance + 21st CLI | React/FastAPI interface redesign and review | Create a restrained, accessible, demo-ready interface | Team must assign | 0 errors / 0 warnings in 21st strict review; 12 automated tests after redesign | Entry 2 |
 
 ## Entry 1
 
@@ -24,6 +25,24 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **Measurable outcome:** AI-assisted implementation produced a working repository and 6-test automated suite. Full EuroSAT evaluation reached 89.4% accuracy and 88.9% macro F1. The final confidence-plus-quality policy reached 91.4% accepted-case accuracy at 78.9% coverage. Browser QA found and corrected stale cached-policy evidence. Human usability outcomes remain pending.
 - **Limitations/risks:** AI can introduce implementation errors, weak methodological assumptions, or inaccurate prose. All generated code and claims require human testing and source verification.
 - **Artifact or commit link:** Add final GitHub repository and commit after publishing.
+
+## Entry 2
+
+- **Date/time:** 2026-08-09
+- **Tools:** OpenAI Codex; UI/UX Pro Max local design database; Framer Motion performance guidance; 21st CLI 1.15.1.
+- **Component/element created:** React/Vite presentation layer, FastAPI model bridge, responsive design tokens, semantic navigation, evidence visualizations, review-queue interaction, frontend/API tests, Docker packaging, and updated demo documentation.
+- **Why AI was appropriate:** The team requested a fast visual redesign that remained technically traceable to the judging rubric and existing evaluated artifacts. The tools were used to generate constraints, critique implementation quality, and accelerate code—not to generate model results or user evidence.
+- **Representative detailed prompt:**
+
+  > Redesign TerraTrust as a minimal but creative scientific decision-support interface that does not look template-generated. Use 21st.dev, UI/UX Pro Max, and Framer Motion. Preserve the validated EuroSAT model, confidence-plus-quality review policy, held-out metrics, human-review handoff, limitations, and full rubric evidence. Avoid gradients, glassmorphism, decorative AI motifs, excessive cards, fabricated claims, and gratuitous animation. Use semantic React, accessible contrast and focus, 44px controls, mobile behavior at 375px, reduced-motion support, clear errors/loading/empty states, and a single production URL backed by the Python model.
+
+- **Output used:** `frontend/`, `api.py`, `design-system/terratrust/MASTER.md`, `tests/test_api.py`, `Dockerfile`, VS Code/CI files, and related documentation edits.
+- **Human-directed design decisions:** The user explicitly requested minimalism, creativity, and removal of an AI-generated aesthetic. The implementation selected Swiss/editorial structure, warm paper, square geometry, a single green action accent, and amber review states. UI/UX Pro Max's first generic blue-dashboard palette was rejected as a poor product fit.
+- **Validation performed:** UI/UX Pro Max design-system and accessibility searches; Framer Motion rule checks; production Vite build; one frontend interaction test; ten Python/API/model tests; strict 21st local review; desktop visual inspection; 375px responsive inspection; full ambiguous-tile-to-review-queue browser flow; browser console check.
+- **Measured outcome:** Production build succeeded. Automated tests passed (1 frontend + 11 Python). 21st strict review returned 0 errors and 0 warnings; its 20 informational findings were token declarations or deliberate CSS fallback colors. At 375px there was no page or navigation overflow and no visible button measured below 44×44px. Browser logs contained no warnings or errors.
+- **21st boundary:** 21st AI sketch generation was attempted but the CLI had no authenticated account, and the browser login did not complete. No generated 21st take is claimed. The installed 21st deterministic local reviewer was used successfully.
+- **Limitations/risks:** Automated accessibility and visual review cannot replace real user testing, assistive-technology testing, or judging. The React production bundle is larger than the former Python-only presentation; its animation features are lazy-scoped and the measured model latency is unchanged.
+- **Artifact or commit link:** Add final GitHub repository and redesign commit after publishing.
 
 ## Where AI was not used
 

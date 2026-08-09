@@ -176,9 +176,11 @@ EuroSAT RGB / multispectral
 
 Recommended hackathon stack:
 
-- Python and PyTorch or TensorFlow for modeling.
-- Streamlit for the fastest polished end-to-end prototype.
-- Plotly or Altair for metrics and reliability charts.
+- Python and scikit-learn for the evaluated model.
+- FastAPI for a small typed model bridge and one production URL.
+- React/Vite for a semantic, responsive presentation layer.
+- Framer Motion for purposeful state transitions only.
+- Native SVG and HTML tables for accessible evidence displays.
 - Pytest for preprocessing, inference-shape, threshold, and API/UI helper tests.
 - JSON/CSV artifacts for reproducible metrics and demo examples.
 
