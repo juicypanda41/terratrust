@@ -30,14 +30,11 @@ The user's decision is concrete: **Which tiles are safe to classify automaticall
 
 ## Product experience
 
-### Screen 1 - Mission Control
+### Screen 1 - Overview
 
-- Total tiles analyzed.
-- Auto-accepted percentage.
-- Human-review percentage.
-- Accuracy on accepted benchmark cases.
-- Current confidence threshold.
-- Short, prominent statement that outputs are screening recommendations, not final land-management decisions.
+- Concise explanation of the land-cover screening and human-checkpoint workflow.
+- One real reference scene that opens the analysis path.
+- Plain-language distinction between a clear result, an uncertain result, and an unverified source.
 
 ### Screen 2 - Analyze a tile
 
@@ -46,32 +43,29 @@ The user's decision is concrete: **Which tiles are safe to classify automaticall
 - Top two classes with calibrated probabilities.
 - Decision badge: `Auto-accept` or `Human review required`.
 - Plain-language reason for the routing decision.
-- Nearest labeled reference examples.
-- Optional Grad-CAM-style visualization labeled as a diagnostic explanation, not proof of causality.
+- Full class-probability comparison and local inference time.
+- Unverified uploaded imagery always remains in review.
 
 ### Screen 3 - Human Review Queue
 
-- Sort uncertain tiles by lowest confidence or smallest top-two margin.
-- Compare the model prediction with similar labeled examples.
-- Allow a reviewer to confirm or override the class.
-- Record the reviewer decision locally for the demo.
+- Preserve the source, prediction, confidence, and review reason for each flagged scene.
+- Let the reviewer remove a completed item from the local demo queue.
 
-### Screen 4 - Evidence Lab
+### Screen 4 - Validation
 
-- Confusion matrix and per-class precision/recall/F1.
-- Reliability diagram before and after calibration.
+- Held-out overall accuracy, macro F1, accepted-case accuracy, coverage, and sample size.
+- Calibration error before and after temperature scaling.
 - Risk-coverage curve showing the accuracy/workload tradeoff.
-- Latency and model size.
-- RGB baseline versus 13-band experiment if the multispectral pipeline is completed and valid.
-- Clear experiment notes: split, sample sizes, seed, hardware, assumptions, and limitations.
+- Controlled quality stress-test table with explicit scope language.
+- Clear operational limitations and SDG contribution boundary.
 
 ## Primary measurable claim
 
 Choose a target accepted-case accuracy using only the validation set, then lock the threshold before final test evaluation.
 
-Final claim format:
+Measured result:
 
-> On the held-out EuroSAT test set (n = ___), TerraTrust achieved ___% accuracy on the ___% of tiles it auto-accepted, while routing ___% to human review. Calibration changed expected calibration error from ___ to ___, and median inference latency was ___ ms on ___.
+> On the held-out EuroSAT RGB test set (n = 4,050), TerraTrust achieved 91.4% accuracy on the 78.9% of scenes accepted by the complete confidence-plus-quality policy, while routing 21.1% to human review. Calibration changed expected calibration error from 2.55% to 0.87%, and median warm local CPU inference was 16.2 ms across 100 images.
 
 Never fill these values with projections. Generate them from the final reproducible evaluation.
 
@@ -80,7 +74,7 @@ Never fill these values with projections. Generate them from the final reproduci
 ### E1 - Reproducible classification baseline
 
 - Use a published or fixed train/validation/test split and record exact sample counts.
-- Train a practical transfer-learning model such as EfficientNet-B0 or MobileNetV3.
+- Train the documented deterministic RGB feature pipeline with a histogram gradient-boosting classifier on ordinary hardware.
 - Report accuracy, macro F1, per-class metrics, and confusion matrix.
 - Fix random seeds and save configuration, weights, and evaluation outputs.
 
@@ -102,7 +96,7 @@ Never fill these values with projections. Generate them from the final reproduci
 - Test whether corrupted images receive lower confidence or higher review rates.
 - Document failure modes.
 
-### E5 - RGB versus multispectral stretch experiment
+### E5 - RGB versus multispectral stretch experiment (not implemented)
 
 - Compare models only with the same split and evaluation protocol.
 - Record preprocessing for all 13 bands and avoid using RGB pretrained weights as an unfair direct comparison without explanation.
@@ -159,7 +153,7 @@ Authoritative context:
 ## Architecture
 
 ```text
-EuroSAT RGB / multispectral
+       EuroSAT RGB
           |
   reproducible data split
           |
@@ -263,7 +257,7 @@ Do not introduce a database, vector service, complex cloud stack, or live Sentin
 1. **0:00-0:20 - Problem:** Satellite land monitoring matters, but a model that guesses on every tile can create false confidence.
 2. **0:20-0:35 - Solution:** TerraTrust classifies clear cases and refers uncertain cases to people.
 3. **0:35-1:25 - Live demo:** Auto-accept an easy tile, route an ambiguous tile, show the reviewer workflow.
-4. **1:25-1:55 - Evidence:** Show test-set selective accuracy, coverage, calibration improvement, worst-class result, and latency.
+4. **1:25-1:55 - Evidence:** Show the held-out sample size, overall accuracy, macro F1, selective accuracy, coverage, calibration improvement, and controlled stress test.
 5. **1:55-2:15 - SDG and impact:** Explain targets 15.1/15.2 and the honest enabling theory of change.
 6. **2:15-2:30 - Scale and limitations:** Live Sentinel data, spatial validation, partner pilot; state that current prototype is European scene classification.
 7. **2:30-2:40 - Close:** One memorable sentence and team contribution.

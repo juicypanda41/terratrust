@@ -7,7 +7,7 @@ Rubric rows supported: Presentation Quality, Technical Execution, Creative AI Us
 
 TerraTrust uses a restrained scientific-editorial interface so judges can understand the decision policy and verify evidence quickly. The visual system is documented in `design-system/terratrust/MASTER.md`.
 
-- Swiss/editorial grid with asymmetric briefing layout.
+- Quiet product grid with a direct working-scene introduction.
 - Warm paper background, near-black type and rules, one field-green action color, and amber review states.
 - Square geometry, no shadows, no gradients, no glass surfaces, no decorative AI motifs, and no generic card wall.
 - System sans-serif typography plus monospace evidence labels; no blocking font request.
@@ -16,7 +16,7 @@ TerraTrust uses a restrained scientific-editorial interface so judges can unders
 
 ## Tool-assisted review
 
-UI/UX Pro Max was used to generate a persistent design system, query citizen-science palettes, compare Swiss/editorial styles, select accessible chart types, and run the required `animation accessibility z-index loading` validation search. Its generic blue dashboard result was rejected in favor of a context-specific system.
+UI/UX Pro Max was used to generate and refine the persistent design system, select accessible chart patterns, and run the required `animation accessibility z-index loading` validation search. Generic dashboard and stylized editorial treatments were rejected in favor of a quiet product interface.
 
 Framer Motion follows the requested performance rules:
 
@@ -32,7 +32,7 @@ The installed 21st CLI 1.15.1 ran `review src --strict --json` against the front
 |---|---:|
 | Errors | 0 |
 | Warnings | 0 |
-| Suggestions | 19 |
+| Suggestions | 18 |
 
 All suggestions were informational hardcoded-color checks. Most point to the centralized `:root` token declarations; the remainder are intentional state/fallback and alpha-overlay literals. No scattered component palette was introduced. 21st AI sketch generation was not used because the CLI was not authenticated; this boundary is disclosed in `docs/ai-use-log.md`.
 

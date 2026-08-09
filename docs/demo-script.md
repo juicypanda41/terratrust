@@ -14,7 +14,7 @@ Open **Analyze**. Show the clear forest scene being accepted, then the ambiguous
 
 ## 1:25-1:55 - Evidence
 
-Open **Evidence**. Show accepted-case accuracy, coverage, calibration change, the risk-coverage curve, and the controlled stress-test table. State the 4,050-tile test sample size.
+Open **Validation**. Show accepted-case accuracy, coverage, calibration change, the risk-coverage curve, and the controlled stress-test table. Point out the 4,050-scene held-out sample size.
 
 ## 1:55-2:15 - SDG and impact
 

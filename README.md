@@ -72,7 +72,7 @@ On a deterministic held-out EuroSAT RGB test set of 4,050 images:
    .\.venv\Scripts\python.exe -m uvicorn api:app --host 127.0.0.1 --port 8501
    ```
 
-7. Open `http://localhost:8501`. For the fastest demo, choose **Screen tile**, select **Ambiguous scene**, run screening, and add the result to the review queue.
+7. Open `http://localhost:8501`. For the fastest demo, choose **Analyze**, select **Ambiguous scene**, run screening, and add the result to the review queue.
 
 VS Code tasks and debug configurations for these commands are included under `.vscode/`.
 
@@ -103,7 +103,7 @@ design-system/terratrust/      Persisted UI source of truth
 MODEL_CARD.md                  Intended use and limitations
 ```
 
-The interface uses a restrained Swiss/editorial design system: warm paper, black rules, one field-green action color, and amber review states. Framer Motion is limited to short state transitions and respects reduced-motion preferences. The production bundle is served by FastAPI, so judges need one URL.
+The interface uses a quiet, utilitarian design system: warm paper, black rules, one field-green action color, and amber review states. Framer Motion is limited to functional state transitions and respects reduced-motion preferences. The production bundle is served by FastAPI, so judges need one URL.
 
 ## Model approach
 

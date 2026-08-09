@@ -378,7 +378,7 @@ function Evidence({ data }) {
           <p className="chart-note">Higher thresholds trade automation for accuracy. The selected policy also applies a separate image-quality check, so final coverage differs from confidence-only points.</p>
         </article>
         <article className="evidence-block">
-          <div className="block-heading"><span>Measured benchmark</span><span>Independent evaluation</span></div>
+          <div className="block-heading"><span>Measured benchmark</span><span>Held-out test / n={metrics.test_count.toLocaleString()}</span></div>
           <div className="benchmark-list">
             <Benchmark label="Overall accuracy" value={metrics.accuracy} />
             <Benchmark label="Macro F1" value={metrics.macro_f1} />
