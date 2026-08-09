@@ -14,4 +14,4 @@ data/downloads/
 
 # Keep evaluated, shareable artifacts but ignore ad-hoc runs.
 artifacts/runs/
-
+output/
