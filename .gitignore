@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.DS_Store
+.idea/
+.vscode/*.log
+tmp/
+data/raw/
+data/downloads/
+*.zip
+*.log
+
+# Keep evaluated, shareable artifacts but ignore ad-hoc runs.
+artifacts/runs/
+

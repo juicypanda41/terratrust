@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "TerraTrust: install",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "pip", "install", "-r", "requirements.txt"],
+      "problemMatcher": []
+    },
+    {
+      "label": "TerraTrust: download EuroSAT RGB",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["scripts/download_data.py"],
+      "problemMatcher": []
+    },
+    {
+      "label": "TerraTrust: train and evaluate",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["scripts/train.py"],
+      "problemMatcher": []
+    },
+    {
+      "label": "TerraTrust: test",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "pytest"],
+      "problemMatcher": []
+    },
+    {
+      "label": "TerraTrust: robustness audit",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["scripts/evaluate_robustness.py"],
+      "problemMatcher": []
+    },
+    {
+      "label": "TerraTrust: fit quality guard",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["scripts/fit_quality_guard.py"],
+      "problemMatcher": []
+    },
+    {
+      "label": "TerraTrust: evaluate final policy",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["scripts/evaluate_policy.py"],
+      "problemMatcher": []
+    },
+    {
+      "label": "TerraTrust: run app",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "streamlit", "run", "app.py"],
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "file": "AnnualCrop_1.jpg",
+    "label": "AnnualCrop"
+  },
+  {
+    "file": "AnnualCrop_2.jpg",
+    "label": "AnnualCrop"
+  },
+  {
+    "file": "Forest_1.jpg",
+    "label": "Forest"
+  },
+  {
+    "file": "Forest_2.jpg",
+    "label": "Forest"
+  },
+  {
+    "file": "HerbaceousVegetation_1.jpg",
+    "label": "HerbaceousVegetation"
+  },
+  {
+    "file": "HerbaceousVegetation_2.jpg",
+    "label": "HerbaceousVegetation"
+  },
+  {
+    "file": "Highway_1.jpg",
+    "label": "Highway"
+  },
+  {
+    "file": "Highway_2.jpg",
+    "label": "Highway"
+  },
+  {
+    "file": "Industrial_1.jpg",
+    "label": "Industrial"
+  },
+  {
+    "file": "Industrial_2.jpg",
+    "label": "Industrial"
+  },
+  {
+    "file": "Pasture_1.jpg",
+    "label": "Pasture"
+  },
+  {
+    "file": "Pasture_2.jpg",
+    "label": "Pasture"
+  },
+  {
+    "file": "PermanentCrop_1.jpg",
+    "label": "PermanentCrop"
+  },
+  {
+    "file": "PermanentCrop_2.jpg",
+    "label": "PermanentCrop"
+  },
+  {
+    "file": "Residential_1.jpg",
+    "label": "Residential"
+  },
+  {
+    "file": "Residential_2.jpg",
+    "label": "Residential"
+  },
+  {
+    "file": "River_1.jpg",
+    "label": "River"
+  },
+  {
+    "file": "River_2.jpg",
+    "label": "River"
+  },
+  {
+    "file": "SeaLake_1.jpg",
+    "label": "SeaLake"
+  },
+  {
+    "file": "SeaLake_2.jpg",
+    "label": "SeaLake"
+  }
+]

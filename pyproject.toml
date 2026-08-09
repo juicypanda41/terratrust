@@ -1,0 +1,14 @@
+[project]
+name = "terratrust"
+version = "0.1.0"
+description = "Human-in-the-loop land-cover screening with calibrated uncertainty"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+

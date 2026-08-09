@@ -1,0 +1,247 @@
+{
+  "status": "evaluated",
+  "dataset": "EuroSAT RGB v2",
+  "dataset_source": "https://zenodo.org/records/7711810",
+  "split_method": "deterministic stratified 70/15/15; not a geographic holdout",
+  "seed": 42,
+  "sample_count": 27000,
+  "train_count": 18900,
+  "validation_count": 4050,
+  "test_count": 4050,
+  "feature_version": "rgb-stat-grid-hist-gradient-v1",
+  "model": "HistGradientBoostingClassifier",
+  "accuracy": 0.894074074074074,
+  "macro_f1": 0.8891574430329815,
+  "temperature": 1.3,
+  "threshold": 0.5035251798561151,
+  "target_selective_accuracy": 0.9,
+  "coverage": 0.7893827160493827,
+  "review_rate": 0.2106172839506173,
+  "selective_accuracy": 0.9136690647482014,
+  "ece_before": 0.0254996322274984,
+  "ece_after": 0.008706888746555293,
+  "brier_before": 0.15666974587237575,
+  "brier_after": 0.15460567784269091,
+  "nll_before": 0.3165475312046051,
+  "nll_after": 0.30749244363201805,
+  "training_seconds": 607.5402725999011,
+  "runtime": {
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "per_class": {
+    "AnnualCrop": {
+      "precision": 0.9011494252873563,
+      "recall": 0.8711111111111111,
+      "f1-score": 0.8858757062146893,
+      "support": 450.0
+    },
+    "Forest": {
+      "precision": 0.9800443458980045,
+      "recall": 0.9822222222222222,
+      "f1-score": 0.9811320754716981,
+      "support": 450.0
+    },
+    "HerbaceousVegetation": {
+      "precision": 0.890625,
+      "recall": 0.8866666666666667,
+      "f1-score": 0.888641425389755,
+      "support": 450.0
+    },
+    "Highway": {
+      "precision": 0.7254335260115607,
+      "recall": 0.6693333333333333,
+      "f1-score": 0.6962552011095701,
+      "support": 375.0
+    },
+    "Industrial": {
+      "precision": 0.9166666666666666,
+      "recall": 0.9386666666666666,
+      "f1-score": 0.927536231884058,
+      "support": 375.0
+    },
+    "Pasture": {
+      "precision": 0.9183006535947712,
+      "recall": 0.9366666666666666,
+      "f1-score": 0.9273927392739274,
+      "support": 300.0
+    },
+    "PermanentCrop": {
+      "precision": 0.8105263157894737,
+      "recall": 0.8213333333333334,
+      "f1-score": 0.8158940397350993,
+      "support": 375.0
+    },
+    "Residential": {
+      "precision": 0.9360341151385928,
+      "recall": 0.9755555555555555,
+      "f1-score": 0.955386289445049,
+      "support": 450.0
+    },
+    "River": {
+      "precision": 0.8115183246073299,
+      "recall": 0.8266666666666667,
+      "f1-score": 0.8190224570673712,
+      "support": 375.0
+    },
+    "SeaLake": {
+      "precision": 0.9955456570155902,
+      "recall": 0.9933333333333333,
+      "f1-score": 0.9944382647385984,
+      "support": 450.0
+    }
+  },
+  "reliability_bins_before": [
+    {
+      "bin_low": 0.30000000000000004,
+      "bin_high": 0.4,
+      "confidence": 0.36312256642126145,
+      "accuracy": 0.32142857142857145,
+      "count": 28
+    },
+    {
+      "bin_low": 0.4,
+      "bin_high": 0.5,
+      "confidence": 0.4604160054299116,
+      "accuracy": 0.4,
+      "count": 95
+    },
+    {
+      "bin_low": 0.5,
+      "bin_high": 0.6000000000000001,
+      "confidence": 0.55106933988293,
+      "accuracy": 0.5506329113924051,
+      "count": 158
+    },
+    {
+      "bin_low": 0.6000000000000001,
+      "bin_high": 0.7000000000000001,
+      "confidence": 0.6518966385302827,
+      "accuracy": 0.5961538461538461,
+      "count": 156
+    },
+    {
+      "bin_low": 0.7000000000000001,
+      "bin_high": 0.8,
+      "confidence": 0.7529017661448375,
+      "accuracy": 0.6313131313131313,
+      "count": 198
+    },
+    {
+      "bin_low": 0.8,
+      "bin_high": 0.9,
+      "confidence": 0.8544618596745676,
+      "accuracy": 0.8033333333333333,
+      "count": 300
+    },
+    {
+      "bin_low": 0.9,
+      "bin_high": 1.0,
+      "confidence": 0.9875404877157163,
+      "accuracy": 0.9720706260032103,
+      "count": 3115
+    }
+  ],
+  "reliability_bins_after": [
+    {
+      "bin_low": 0.2,
+      "bin_high": 0.30000000000000004,
+      "confidence": 0.28934375880552965,
+      "accuracy": 0.0,
+      "count": 4
+    },
+    {
+      "bin_low": 0.30000000000000004,
+      "bin_high": 0.4,
+      "confidence": 0.3634990962019429,
+      "accuracy": 0.37037037037037035,
+      "count": 54
+    },
+    {
+      "bin_low": 0.4,
+      "bin_high": 0.5,
+      "confidence": 0.45897510125998603,
+      "accuracy": 0.5266666666666666,
+      "count": 150
+    },
+    {
+      "bin_low": 0.5,
+      "bin_high": 0.6000000000000001,
+      "confidence": 0.5496568634275043,
+      "accuracy": 0.5396825396825397,
+      "count": 189
+    },
+    {
+      "bin_low": 0.6000000000000001,
+      "bin_high": 0.7000000000000001,
+      "confidence": 0.6501735213616228,
+      "accuracy": 0.6355140186915887,
+      "count": 214
+    },
+    {
+      "bin_low": 0.7000000000000001,
+      "bin_high": 0.8,
+      "confidence": 0.7516115103910311,
+      "accuracy": 0.7626459143968871,
+      "count": 257
+    },
+    {
+      "bin_low": 0.8,
+      "bin_high": 0.9,
+      "confidence": 0.851058835621194,
+      "accuracy": 0.8728179551122195,
+      "count": 401
+    },
+    {
+      "bin_low": 0.9,
+      "bin_high": 1.0,
+      "confidence": 0.9820218585876886,
+      "accuracy": 0.9845379359942467,
+      "count": 2781
+    }
+  ],
+  "limitations": [
+    "Scene classification only; no pixel-level segmentation or acreage.",
+    "No temporal pairs; results do not detect land-cover change.",
+    "EuroSAT is European and this random stratified split may overestimate geographic transfer.",
+    "Confidence is model-specific and is not a guarantee of real-world correctness."
+  ],
+  "inference_latency_ms": {
+    "sample_count": 100,
+    "median": 16.24440000159666,
+    "p95": 22.347214992623773,
+    "scope": "warm local CPU, feature extraction plus classifier; deployment hardware will differ"
+  },
+  "robustness_audit": {
+    "sample_count_per_condition": 400,
+    "conditions": [
+      "Clean",
+      "Blur",
+      "Low brightness",
+      "Low contrast",
+      "Sensor-like noise"
+    ],
+    "purpose": "controlled stress test, not a claim of real-world distribution coverage"
+  },
+  "quality_guard": {
+    "training_source": "validation split only",
+    "clean_validation_samples": 800,
+    "synthetically_perturbed_validation_samples": 3200,
+    "threshold": 0.20450358639467636,
+    "clean_validation_false_alert_target": 0.05,
+    "conditions": [
+      "Blur",
+      "Low brightness",
+      "Low contrast",
+      "Sensor-like noise"
+    ],
+    "limitation": "Detects controlled quality shifts only; it is not a general out-of-distribution guarantee."
+  },
+  "confidence_only_policy": {
+    "coverage": 0.9471604938271605,
+    "review_rate": 0.0528395061728395,
+    "selective_accuracy": 0.9173618352450469
+  },
+  "quality_alert_rate_clean_test": 0.16469135802469137,
+  "policy": "accept only when calibrated confidence passes and quality guard is clear"
+}
