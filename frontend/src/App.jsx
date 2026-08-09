@@ -14,10 +14,10 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const NAV_ITEMS = [
-  { id: "briefing", label: "Briefing", index: "01" },
-  { id: "screen", label: "Screen tile", index: "02" },
-  { id: "queue", label: "Review queue", index: "03" },
-  { id: "evidence", label: "Evidence", index: "04" },
+  { id: "briefing", label: "Overview" },
+  { id: "screen", label: "Analyze" },
+  { id: "queue", label: "Review" },
+  { id: "evidence", label: "Validation" },
 ];
 
 const viewVariants = {
@@ -30,11 +30,6 @@ const resultVariants = {
   hidden: { opacity: 0, y: 8 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.22, ease: "easeOut" } },
   exit: { opacity: 0, transition: { duration: 0.12 } },
-};
-
-const terrainVariants = {
-  hidden: { opacity: 0, scale: 1.04, x: 18 },
-  visible: { opacity: 1, scale: 1, x: 0, transition: { duration: 0.38, ease: "easeOut" } },
 };
 
 const PUBLIC_LIMITATIONS = [
@@ -163,7 +158,7 @@ function App() {
       <main id="main-content" className="page-frame" tabIndex="-1">
         <AnimatePresence mode="wait" initial={false}>
           <m.div key={activeView} variants={viewVariants} initial="hidden" animate="visible" exit="exit">
-            {activeView === "briefing" && <Briefing onStart={() => selectView("screen")} />}
+            {activeView === "briefing" && <Briefing demo={featuredDemos[0]} onStart={() => selectView("screen")} />}
             {activeView === "screen" && (
               <ScreenTile
                 demos={featuredDemos}
@@ -186,8 +181,8 @@ function App() {
         </AnimatePresence>
       </main>
       <footer className="site-footer">
-        <span>TerraTrust / Responsible land screening</span>
-        <span>Built for decisions that deserve a second look</span>
+        <span>TerraTrust</span>
+        <span>Responsible land-cover screening</span>
       </footer>
     </div>
   );
@@ -208,7 +203,6 @@ function Header({ activeView, queueCount, onNavigate }) {
             onClick={() => onNavigate(item.id)}
             aria-current={activeView === item.id ? "page" : undefined}
           >
-            <span>{item.index}</span>
             {item.label}
             {item.id === "queue" && queueCount > 0 && <b aria-label={`${queueCount} queued`}>{queueCount}</b>}
           </button>
@@ -218,84 +212,40 @@ function Header({ activeView, queueCount, onNavigate }) {
   );
 }
 
-function Briefing({ onStart }) {
+function Briefing({ demo, onStart }) {
   return (
     <>
-      <section className="hero-grid" aria-labelledby="hero-heading">
-        <TerrainField />
+      <section className="home-hero" aria-labelledby="hero-heading">
         <div className="hero-copy">
-          <p className="kicker">Earth observation / Human review</p>
-          <h1 id="hero-heading">Know what to trust.<br />Know what to review.</h1>
+          <p className="product-label">Responsible land-cover screening</p>
+          <h1 id="hero-heading">Land-cover screening with a human checkpoint.</h1>
           <p className="hero-summary">
-            TerraTrust moves clear land-cover signals forward and pauses uncertain ones for a person.
-            No forced answers. No hidden handoffs.
+            TerraTrust classifies satellite scenes and sends uncertain cases to review, with the reason attached.
           </p>
           <m.button className="primary-action" onClick={onStart} whileTap={{ scale: 0.98 }}>
-            Screen a tile <ArrowRight size={18} aria-hidden="true" />
+            Analyze a scene <ArrowRight size={18} aria-hidden="true" />
           </m.button>
         </div>
-        <aside className="policy-plate" aria-label="Decision policy">
-          <div className="plate-index">THE FLOW / 01</div>
-          <div className="policy-diagram" aria-hidden="true">
-            <span className="policy-node solid" />
-            <span className="policy-line" />
-            <span className="policy-node" />
-          </div>
-          <h2>Two outcomes.<br />One accountable flow.</h2>
-          <ol>
-            <li><span>01</span> Clear enough to continue.</li>
-            <li><span>02</span> Uncertain or unfamiliar goes to review.</li>
-          </ol>
-          <p>Every handoff keeps the reason attached.</p>
-        </aside>
+        {demo && (
+          <button className="scene-preview" onClick={onStart} aria-label={`Analyze reference scene: ${demo.story}`}>
+            <img src={demo.image_url} width="560" height="560" alt={`${demo.story}, reference land-cover scene`} />
+            <span className="scene-preview-caption">
+              <span><strong>{demo.story}</strong><small>Reference scene</small></span>
+              <ArrowRight size={20} aria-hidden="true" />
+            </span>
+          </button>
+        )}
       </section>
 
-      <section className="principle-grid">
-        <div>
-          <p className="section-index">HOW IT WORKS / 02</p>
-          <h2>One useful answer—or a clear stop.</h2>
-        </div>
-        <div className="principle-copy">
-          <p>
-            Most tools are built to answer. TerraTrust is also built to pause. That makes uncertainty useful:
-            it changes the next action instead of becoming another number on a screen.
-          </p>
-          <div className="flow-rail" aria-label="Screen, assess, route">
-            <span><b>01</b> Screen</span><ArrowRight size={16} aria-hidden="true" />
-            <span><b>02</b> Assess</span><ArrowRight size={16} aria-hidden="true" />
-            <span><b>03</b> Route</span>
-          </div>
-        </div>
+      <section className="home-workflow" aria-labelledby="workflow-heading">
+        <h2 id="workflow-heading">Clear scenes move. Uncertain scenes wait.</h2>
+        <dl className="workflow-list">
+          <div><dt>Clear result</dt><dd>Continue with the land-cover classification.</dd></div>
+          <div><dt>Uncertain result</dt><dd>Send the scene to review with an explanation.</dd></div>
+          <div><dt>Unverified source</dt><dd>Keep the scene in review until its origin is confirmed.</dd></div>
+        </dl>
       </section>
     </>
-  );
-}
-
-function TerrainField() {
-  return (
-    <m.svg
-      className="terrain-field"
-      viewBox="0 0 1200 720"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden="true"
-      focusable="false"
-      variants={terrainVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <g className="terrain-grid">
-        <path d="M720 -40V760M840 -40V760M960 -40V760M1080 -40V760" />
-        <path d="M600 120H1240M600 240H1240M600 360H1240M600 480H1240M600 600H1240" />
-      </g>
-      <g className="terrain-contours">
-        <path d="M1260 14C1025-72 780 24 764 211c-18 210 222 240 211 393-8 112-112 177-223 191" />
-        <path d="M1268 72c-204-75-416 8-430 166-14 173 189 204 179 342-8 105-99 167-197 184" />
-        <path d="M1278 134c-172-64-350 4-360 134-10 139 156 170 147 289-7 94-82 146-162 163" />
-        <path d="M1282 195c-139-52-282 0-288 104-7 106 122 138 114 235-6 77-64 119-127 136" />
-        <path d="M1288 257c-105-40-210-3-214 73-4 77 87 108 80 181-5 59-47 90-91 105" />
-        <path d="M1293 318c-70-28-138-5-140 44-2 49 53 79 47 129-4 39-28 59-57 72" />
-      </g>
-    </m.svg>
   );
 }
 
@@ -304,14 +254,13 @@ function ScreenTile({ demos, selectedDemo, uploadedFile, previewUrl, fileInput, 
   const imageAlt = selectedDemo ? `${selectedDemo.story}, reference scene labeled ${selectedDemo.display_label}` : `Uploaded scene ${uploadedFile?.name || ""}`;
   return (
     <section aria-labelledby="screen-heading">
-      <PageIntro index="02" eyebrow="Operational demo" title="Screen one scene." description="Choose a reference scene or upload an RGB image. New imagery stays in review until its source is verified." />
+      <PageIntro eyebrow="Analysis" title="Analyze a scene" description="Choose a reference scene or upload an RGB image. New imagery stays in review until its source is verified." />
       <div className="screen-layout">
         <div className="input-column">
           <fieldset className="demo-selector">
             <legend>Choose a reference scene</legend>
-            {demos.map((demo, index) => (
+            {demos.map((demo) => (
               <button key={demo.file} className={selectedDemo?.file === demo.file ? "demo-row selected" : "demo-row"} onClick={() => onChooseDemo(demo)} aria-pressed={selectedDemo?.file === demo.file}>
-                <span>0{index + 1}</span>
                 <img src={demo.image_url} width="64" height="64" alt="" />
                 <span><strong>{demo.story}</strong><small>Reference: {demo.display_label}</small></span>
                 <ChevronRight size={18} aria-hidden="true" />
@@ -346,7 +295,6 @@ function ScreenTile({ demos, selectedDemo, uploadedFile, previewUrl, fileInput, 
               </m.div>
             ) : (
               <div className="result-empty">
-                <p className="plate-index">OUTPUT / PENDING</p>
                 <h2>The decision appears here.</h2>
                 <p>Predicted class, calibrated confidence, review reason, runner-up, latency, and every class probability remain visible.</p>
               </div>
@@ -361,7 +309,6 @@ function ScreenTile({ demos, selectedDemo, uploadedFile, previewUrl, fileInput, 
 function ResultPanel({ result, onQueue }) {
   return (
     <div className="result-panel">
-      <p className="plate-index">OUTPUT / COMPLETE</p>
       <div className={result.requires_review ? "decision-tag review" : "decision-tag accept"}>
         {result.requires_review ? <CircleAlert size={17} aria-hidden="true" /> : <Check size={17} aria-hidden="true" />}
         {result.requires_review ? "Human review required" : "Eligible for auto-acceptance"}
@@ -391,13 +338,13 @@ function ResultPanel({ result, onQueue }) {
 function ReviewQueue({ items, onScreen, onRemove }) {
   return (
     <section aria-labelledby="queue-heading">
-      <PageIntro index="03" eyebrow="Human checkpoint" title="Review queue." description="Flagged scenes arrive with the model's decision, uncertainty, and review reason intact. No silent overrides." />
+      <PageIntro eyebrow="Human checkpoint" title="Review queue" description="Flagged scenes arrive with the classification, uncertainty, and review reason intact." />
       {items.length === 0 ? (
         <div className="queue-empty">
           <FileCheck2 size={28} aria-hidden="true" />
           <h2>No scenes are waiting.</h2>
           <p>Run the ambiguous reference scene to exercise the handoff.</p>
-          <button className="secondary-action" onClick={onScreen}>Go to screen tile <ArrowRight size={18} aria-hidden="true" /></button>
+          <button className="secondary-action" onClick={onScreen}>Go to analysis <ArrowRight size={18} aria-hidden="true" /></button>
         </div>
       ) : (
         <div className="queue-list">
@@ -406,7 +353,7 @@ function ReviewQueue({ items, onScreen, onRemove }) {
             {items.map((item) => (
               <m.article key={item.id} className="queue-item" variants={resultVariants} initial="hidden" animate="visible" exit="exit">
                 <img src={item.preview} width="96" height="96" alt={`Queued satellite tile ${item.source}`} />
-                <div><span className="plate-index">{item.source}</span><h2>{item.result.predicted_display}</h2><p>{item.result.review_reason}</p></div>
+                <div><span className="queue-source">{item.source}</span><h2>{item.result.predicted_display}</h2><p>{item.result.review_reason}</p></div>
                 <div className="queue-confidence"><strong>{pct(item.result.confidence)}</strong><span>confidence</span></div>
                 <button className="icon-button" onClick={() => onRemove(item.id)} aria-label={`Remove ${item.source} from review queue`}><X size={20} aria-hidden="true" /></button>
               </m.article>
@@ -423,7 +370,7 @@ function Evidence({ data }) {
   const target = metrics.target_selective_accuracy;
   return (
     <section aria-labelledby="evidence-heading">
-      <PageIntro index="04" eyebrow="Accountability" title="Proof, with limits." description="Performance, safeguards, and boundaries stay visible for anyone who wants to inspect them." />
+      <PageIntro eyebrow="Validation" title="Performance and limits" description="Performance, safeguards, and boundaries stay visible for anyone who wants to inspect them." />
       <div className="evidence-grid">
         <article className="evidence-block wide">
           <div className="block-heading"><span>Accuracy / coverage trade-off</span><span>Validation-selected threshold: {pct(metrics.threshold, 0)}</span></div>
@@ -459,7 +406,7 @@ function Evidence({ data }) {
         </article>
         <article className="evidence-block wide limits-block">
           <div>
-            <p className="section-index">BOUNDARIES / 05</p>
+            <p className="page-eyebrow">Boundaries</p>
             <h2>What TerraTrust does not claim.</h2>
           </div>
           <ul>{PUBLIC_LIMITATIONS.map((limit) => <li key={limit}>{limit}</li>)}</ul>
@@ -498,8 +445,8 @@ function RiskCurve({ rows, threshold }) {
   );
 }
 
-function PageIntro({ index, eyebrow, title, description }) {
-  return <header className="page-intro"><div><p className="section-index">{index} / {eyebrow}</p><h1>{title}</h1></div><p>{description}</p></header>;
+function PageIntro({ eyebrow, title, description }) {
+  return <header className="page-intro"><div><p className="page-eyebrow">{eyebrow}</p><h1>{title}</h1></div><p>{description}</p></header>;
 }
 
 function SystemError({ message }) {

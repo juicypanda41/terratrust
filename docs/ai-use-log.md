@@ -9,6 +9,7 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 | 2026-08-09 | OpenAI Codex | Project strategy, repository scaffold, application code, tests, and documentation | Accelerate implementation and rubric coverage | Team must assign | Measure after team review | Entry 1 |
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance + 21st CLI | React/FastAPI interface redesign and review | Create a restrained, accessible, demo-ready interface | Team must assign | 0 errors / 0 warnings in 21st strict review; 12 automated tests after redesign | Entry 2 |
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance | Homepage simplification and contour-field art direction | Replace evaluation-first presentation with a stronger product-first brand experience | Team must assign | Benchmark strip and event/dataset/model jargon removed from primary flow; build and responsive QA rerun | Entry 3 |
+| 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance | Product-interface de-stylization | Remove generated-looking visual conventions after direct human critique | Team must assign | Decorative hero, numbered navigation, agency labels, and oversized type removed; automated and visual QA rerun | Entry 4 |
 
 ## Entry 1
 
@@ -59,6 +60,21 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **Validation performed:** UI/UX Pro Max style, React, motion, accessibility, and performance searches; Framer Motion bundle/variant/transform guidance; frontend production build and test; complete Python test suite; desktop and responsive browser inspection.
 - **Measured outcome:** Removed the homepage benchmark ledger, sample count, dataset name, threshold explanation, event track label, and model-input size language. The homepage now has one dark contour field, one primary action, and a plain-language two-outcome workflow. No new image asset, font request, canvas runtime, gradient, or continuous animation was added.
 - **Limitations:** “Professional” is a qualitative judgment. Final acceptance still requires real participant and team review; the evidence view intentionally retains technical performance material needed for responsible disclosure and judging.
+
+## Entry 4
+
+- **Date/time:** 2026-08-09
+- **Tools:** OpenAI Codex; UI/UX Pro Max local design database; Framer Motion performance guidance.
+- **Component/element changed:** Homepage composition, navigation labels, result-state labels, evidence heading treatment, and responsive presentation.
+- **Representative detailed prompt:**
+
+  > Remove everything that makes the app look AI-made. Keep it professional, minimal, and credible as a working geospatial product. Preserve the working analysis, human-review handoff, validation evidence, accessibility, and honest limitations.
+
+- **Human-directed design decision:** The user rejected the previous dark contour hero and stylized editorial treatment as visibly generated. That direct critique overrode the earlier art direction.
+- **Output used:** `frontend/src/App.jsx`, `frontend/src/styles.css`, `frontend/src/App.test.jsx`, `design-system/terratrust/MASTER.md`, and supporting demo/design documentation.
+- **Validation performed:** Production build, frontend interaction test, Python/API/model test suite, strict 21st review, desktop and 375px visual inspection, overflow/touch-target checks, and browser-console review.
+- **Measured outcome:** Removed the abstract hero graphic, decorative motion, numbered navigation, oversized slogan, policy diagram, and uppercase output/boundary labels. The homepage now uses the real reference scene and plain workflow language. No model metric or user-research claim was changed.
+- **Limitations:** Whether an interface feels human-designed is qualitative. Final acceptance remains a human team decision and does not guarantee a judging result.
 
 ## Where AI was not used
 

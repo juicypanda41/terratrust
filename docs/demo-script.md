@@ -10,7 +10,7 @@
 
 ## 0:35-1:25 - Product
 
-Open **Screen tile**. Show the clear forest tile being accepted, then the ambiguous highway tile being routed to **Review queue**. Explain the two-check policy in one sentence.
+Open **Analyze**. Show the clear forest scene being accepted, then the ambiguous highway scene being routed to **Review queue**. Explain the two-check policy in one sentence.
 
 ## 1:25-1:55 - Evidence
 

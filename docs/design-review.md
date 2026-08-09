@@ -32,13 +32,13 @@ The installed 21st CLI 1.15.1 ran `review src --strict --json` against the front
 |---|---:|
 | Errors | 0 |
 | Warnings | 0 |
-| Suggestions | 24 |
+| Suggestions | 19 |
 
 All suggestions were informational hardcoded-color checks. Most point to the centralized `:root` token declarations; the remainder are intentional state/fallback and alpha-overlay literals. No scattered component palette was introduced. 21st AI sketch generation was not used because the CLI was not authenticated; this boundary is disclosed in `docs/ai-use-log.md`.
 
 ## Product-first homepage refinement
 
-The final homepage removes the benchmark ledger, dataset branding, image counts, threshold explanation, event track label, and model-input dimensions from the primary story. A dark, code-native SVG contour field replaces the plain paper hero. It animates once with transform and opacity, has no continuous loop, loads no additional asset, and becomes static under reduced-motion preferences. Technical performance remains available under **Evidence** rather than acting as the brand headline.
+The final homepage removes the benchmark ledger, dataset branding, image counts, threshold explanation, event track label, model-input dimensions, decorative contour art, numbered navigation, agency-style micro-labels, and oversized slogan treatment from the primary story. The introduction now pairs a concise product statement with a real reference scene from the working demo. A plain three-outcome workflow explains the human checkpoint without a decorative diagram. Technical performance remains under **Validation** rather than acting as the brand headline.
 
 ## Functional and responsive QA
 
