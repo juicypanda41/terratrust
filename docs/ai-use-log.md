@@ -181,8 +181,8 @@ Document human-owned work and the reason it stayed human-led, such as firsthand 
 - **Tool:** Codex with Vercel deployment guidance and official Vercel documentation
 - **Purpose:** Diagnose the failed Git-connected production deployment shown in Vercel's build log.
 - **Representative prompt:** "Deployment failed with error" with a screenshot showing Vercel's backend-framework internal-rewrite warning.
-- **Output used:** Removed unsupported same-application rewrites and the static-only output override; retained the frontend build, explicitly bundled its output with the FastAPI function, allowlisted Vite's required `esbuild` install script under pnpm's dependency-build policy, declared `api:app` as the unambiguous FastAPI entrypoint, and pinned the remote build command to pnpm 10.17.1 so Vercel reads the v9-format lockfile correctly.
+- **Output used:** Removed unsupported same-application rewrites and the static-only output override; retained and bundled the frontend build; declared `api:app` as the FastAPI entrypoint; pinned pnpm 10.17.1 for the lockfile; and declared the Python runtime dependencies in `pyproject.toml` so the deployed function can load the image-processing model.
 - **Rationale:** TerraTrust already owns `/api`, `/demo-assets`, `/assets`, and the SPA fallback through native FastAPI routes. Vercel recommends native framework routing for backend framework projects.
-- **Validation:** Local production frontend build, Python test suite, and repository configuration checks; production URL verification is recorded after Vercel completes the Git-triggered redeployment.
+- **Validation:** Local production frontend build, Python test suite, repository configuration checks, remote Vercel build status, and live homepage/API requests.
 - **Measurable outcome:** Configuration validation no longer encounters the internal-rewrite conflict; deployment health and route checks remain pending until the remote build completes.
 - **Boundary:** No model metrics, user evidence, or impact claims were generated or changed.
