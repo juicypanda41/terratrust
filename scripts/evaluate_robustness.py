@@ -46,7 +46,6 @@ def main() -> None:
         remaining, test_size=0.50, stratify=labels[remaining], random_state=SEED
     )
 
-    # Fixed, class-balanced subset keeps this post-training audit quick and reproducible.
     subset = []
     for class_index in range(10):
         members = [idx for idx in test_indices if labels[idx] == class_index][:40]
@@ -98,7 +97,6 @@ def main() -> None:
     metrics_path = ARTIFACT_DIR / "metrics.json"
     metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
 
-    # Warm end-to-end latency on 100 clean images, including features and model prediction.
     inference_times = []
     for index in subset[:100]:
         with Image.open(paths[index]) as image:

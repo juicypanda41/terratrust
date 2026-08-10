@@ -186,3 +186,14 @@ Document human-owned work and the reason it stayed human-led, such as firsthand 
 - **Validation:** Local production frontend build, Python test suite, repository configuration checks, remote Vercel build status, and live homepage/API requests.
 - **Measurable outcome:** Production deployment reached `Ready`; `/api/health` returned `status: ok` with model and frontend ready, `/api/bootstrap` returned 20 demo records, and the Forest reference analysis returned `Forest` without human review.
 - **Boundary:** No model metrics, user evidence, or impact claims were generated or changed.
+
+## 2026-08-09 — Final repository documentation pass
+
+- **Tool:** Codex
+- **Purpose:** Make the public repository easier for judges and developers to understand without changing the product.
+- **Representative prompt:** "Make sure our project has a very good README, remove code that looks AI-generated without altering the final product, and match my usual project style."
+- **Output used:** Reworked the README around the live product, actual workflow, measured results, setup, architecture, tests, deployment, SDG scope, attribution, limitations, and evidence links. Removed two nonessential explanatory comments from the robustness script.
+- **Rationale:** Supports the judging scorecard rows for implementation quality, documented rationale, evidence, feasibility, scalability, delivery, and AI-use disclosure while keeping the repository direct and readable.
+- **Validation:** Documentation links, commands, metric values, API routes, and deployment URL checked against repository files and the live application; full backend, frontend, and production build checks run before commit.
+- **Measurable outcome:** The root README now provides one complete path from project purpose through local reproduction and deployment verification, with direct links to nine submission evidence files.
+- **Boundary:** No interface behavior, model behavior, evaluation output, or measured claim was changed. HeroVerse was not available locally or on the identified public GitHub account, so no unverifiable style details were copied.
