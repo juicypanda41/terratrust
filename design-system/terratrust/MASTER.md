@@ -1,61 +1,56 @@
-# TerraTrust Design System
+# TerraTrust Design System — Immersive Editorial Variant
 
-Source of truth for the interface. Refined on August 9, 2026 using the local Iris Hackathon interface as the concrete reference and the requested calm management-tool character as the secondary direction.
+This reversible variant was created on August 9, 2026 on branch `codex/immersive-terra-design`. The previous calm light interface remains recoverable from commit `7d2bb82` on `main`.
 
 ## Direction
 
-- Product: a land-cover review instrument, not a marketing site.
-- Tone: calm, practical, quiet, and accountable.
-- Reference qualities: compact 1240px frame, serif display type, warm paper, thin rules, plain controls, and one focused workspace.
-- Avoid: abstract hero art, gradients, glass, shadows, soft card walls, bento grids, numbered steps, agency labels, oversized slogans, decorative animation, fake maps, and AI-product motifs.
-- Use real product states and measured evidence as the visual content.
+- Product: a responsible land-cover verification instrument, not a generic AI landing page.
+- Tone: cinematic, sober, environmental, and accountable.
+- Adapted reference qualities: near-black canvas, Instrument Serif display type, atmospheric depth, a restrained glass header, generous space, and editorial scale.
+- Preserve: all four working destinations, source selection, uploads, API inference, probability output, Human verification queue, validation evidence, limitations, and deployment plan.
+- Avoid: unrelated agency copy, email capture, pricing, autoplay background video, fake maps, neon AI glows, pill overload, bento walls, decorative motion, and unsupported environmental claims.
 
 ## Tokens
 
 | Role | Value | Use |
 |---|---|---|
-| Paper | `#F4F3EE` | Page background |
-| Surface | `#FBFAF6` | Analysis workspace |
-| Ink | `#20231E` | Primary text and strong rules |
-| Muted | `#666A62` | Supporting copy |
-| Line | `#D1D2CB` | Internal separators |
-| Line dark | `#9A9E95` | Control borders |
-| Field | `#B8C99B` | Primary action surface |
-| Field dark | `#526342` | Focus and accepted state |
-| Review | `#8A4D1F` | Human-review state |
-| Error | `#9F2F25` | Recoverable errors |
+| Canvas | `#090B09` | Page background |
+| Surface | `#111410` | Product workspaces |
+| Raised surface | `#171B16` | Optional hierarchy |
+| Ink | `#F2F3ED` | Primary text |
+| Muted | `#A7ACA2` | Supporting text |
+| Line | `rgba(242,243,237,.14)` | Internal rules |
+| Strong line | `rgba(242,243,237,.32)` | Workspace boundaries |
+| Field | `#B8D58F` | Primary actions |
+| Review | `#EFB16F` | Human-verification state |
+| Error | `#FF8F82` | Recoverable errors |
 
-Display headings use Newsreader with Georgia fallback. Interface copy uses Roboto with Arial fallback. Roboto Mono is reserved for filenames and small factual metadata.
-
-Spacing follows a 4/8px rhythm. The page width is `min(100% - 40px, 1240px)` on desktop and `100% - 32px` on phones.
+Display headings use Instrument Serif with Georgia fallback. Interface copy uses Roboto with Arial fallback. Roboto Mono is reserved for filenames, provenance, and small factual metadata.
 
 ## Structure
 
-- Masthead: small TT mark, wordmark, and one quiet product descriptor.
-- Navigation: four plain text destinations under the masthead.
-- Overview: one concise serif statement, one text action, and three ruled workflow lines.
-- Analyze: one bordered two-column workspace. Source and controls stay left; the result stays right.
-- Human verification: a ruled list, never a stack of floating cards.
-- Validation: one metric strip followed by report-like sections and a native HTML table.
-- Footer: short product boundary statement.
+- Header: one translucent, blurred instrument bar with four plain navigation destinations.
+- Overview: viewport-scale editorial statement over a CSS-only terrain atmosphere; no stock footage or fabricated geographic data.
+- Analyze: stable two-column source/result workspace; atmosphere never competes with task controls.
+- Human verification: ruled operational queue.
+- Validation: native tables, chart, metric strip, SDG contribution chain, limits, and deployment plan.
+- Footer: explicit product boundary.
 
-## Interaction
+## Motion and accessibility
 
-- Native semantic controls only.
-- Minimum target height: 44px.
-- One primary action in each task area.
-- Loading is the only continuous animation.
-- No Framer Motion components or decorative entrance transitions in the current interface.
-- Reduced-motion CSS remains as a safety fallback.
-- Status always uses text and an icon in addition to color.
+- One 280ms opacity/translate view entrance using `LazyMotion` and `domAnimation`.
+- Motion variants live outside React components to prevent recreation.
+- `useReducedMotion` skips the initial offset, and CSS enforces reduced-motion preferences.
+- No scroll-linked motion, autoplay media, parallax, or continuous decorative animation.
+- Native semantic controls, visible focus rings, textual status labels, 44px minimum targets, and horizontally scrollable data tables remain required.
 
-## Responsive behavior
+## Reversibility
 
-- Above 900px: two-column analysis workspace and validation layout.
-- At 900px: workspaces become one column.
-- At 640px: compact four-column navigation, stacked actions, two-by-two metrics, and simplified queue rows.
-- At 375px: no page-level horizontal scrolling and all controls remain at least 44px high.
+- Current experiment: branch `codex/immersive-terra-design`.
+- Known-good light version: commit `7d2bb82` on `main`.
+- To inspect the old design without deleting this work: `git switch main`.
+- To return to this variant: `git switch codex/immersive-terra-design`.
 
 ## Rubric intent
 
-The restrained design supports Presentation Quality and Technical Execution by keeping the working analysis, review handoff, measured results, error states, and limitations easy to verify. Styling never implies environmental outcomes or deployment readiness that have not been measured.
+The visual direction supports Presentation Quality without hiding Technical Execution. Measured evidence remains more prominent than decorative material, and projected or unmeasured outcomes remain labeled.

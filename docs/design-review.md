@@ -59,3 +59,16 @@ The final narrow render uses four plain navigation labels and hides the secondar
 - Build and run the included Docker image on a machine with Docker; Docker was unavailable locally.
 - Conduct the planned usability sessions with real participants; do not invent outcomes.
 - Rehearse and record the final 2-3 minute demo with all team members represented.
+
+## Reversible immersive editorial variant
+
+On August 9, 2026, the user supplied a cinematic black/glass/video landing-page recreation prompt. The direction was adapted—not copied literally—to retain TerraTrust's real product hierarchy and rubric evidence:
+
+- Kept the near-black editorial canvas, Instrument Serif display character, atmospheric depth, and restrained glass treatment.
+- Replaced external autoplay footage with a lightweight CSS-only terrain atmosphere to avoid irrelevant imagery, performance cost, and motion-accessibility risk.
+- Rejected newsletter, pricing, login, social, generic agency, and service-card content because those controls do not belong to the product.
+- Preserved Overview, Analyze, Human verification, Validation, API inference, uploads, probability details, error states, evidence tables, limits, and deployment information.
+- Added one 280ms opacity/translate view entrance through Framer Motion `LazyMotion`; reduced-motion users receive the final state immediately.
+- Isolated the experiment on `codex/immersive-terra-design`. The known-good light design remains at commit `7d2bb82` on `main`.
+
+This change maps to Presentation Quality and Technical Execution in `docs/judging-scorecard.md`. Final visual preference remains a human decision.

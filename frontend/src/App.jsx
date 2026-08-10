@@ -9,7 +9,13 @@ import {
   ScanSearch,
   X,
 } from "lucide-react";
+import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
+
+const VIEW_MOTION = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.28, ease: [0.16, 1, 0.3, 1] } },
+};
 
 const NAV_ITEMS = [
   { id: "briefing", label: "Overview" },
@@ -34,6 +40,7 @@ async function readJson(response) {
 }
 
 function App() {
+  const reduceMotion = useReducedMotion();
   const [activeView, setActiveView] = useState(() => {
     const hash = window.location.hash.replace("#", "");
     return NAV_ITEMS.some((item) => item.id === hash) ? hash : "briefing";
@@ -146,25 +153,35 @@ function App() {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Header activeView={activeView} queueCount={queue.length} onNavigate={selectView} />
       <main id="main-content" tabIndex="-1">
-        {activeView === "briefing" && <Overview onStart={() => selectView("screen")} />}
-        {activeView === "screen" && (
-          <Analyze
-            demos={featuredDemos}
-            selectedDemo={selectedDemo}
-            uploadedFile={uploadedFile}
-            previewUrl={previewUrl}
-            fileInput={fileInput}
-            result={result}
-            analyzing={analyzing}
-            error={analysisError}
-            onChooseDemo={chooseDemo}
-            onChooseUpload={chooseUpload}
-            onAnalyze={runAnalysis}
-            onQueue={addToQueue}
-          />
-        )}
-        {activeView === "queue" && <ReviewQueue items={queue} onAnalyze={() => selectView("screen")} onRemove={removeFromQueue} />}
-        {activeView === "evidence" && <Validation data={data} />}
+        <LazyMotion features={domAnimation} strict>
+          <m.div
+            className="view-frame"
+            key={activeView}
+            variants={VIEW_MOTION}
+            initial={reduceMotion ? "visible" : "hidden"}
+            animate="visible"
+          >
+            {activeView === "briefing" && <Overview onStart={() => selectView("screen")} />}
+            {activeView === "screen" && (
+              <Analyze
+                demos={featuredDemos}
+                selectedDemo={selectedDemo}
+                uploadedFile={uploadedFile}
+                previewUrl={previewUrl}
+                fileInput={fileInput}
+                result={result}
+                analyzing={analyzing}
+                error={analysisError}
+                onChooseDemo={chooseDemo}
+                onChooseUpload={chooseUpload}
+                onAnalyze={runAnalysis}
+                onQueue={addToQueue}
+              />
+            )}
+            {activeView === "queue" && <ReviewQueue items={queue} onAnalyze={() => selectView("screen")} onRemove={removeFromQueue} />}
+            {activeView === "evidence" && <Validation data={data} />}
+          </m.div>
+        </LazyMotion>
       </main>
       <footer><span>TerraTrust</span><span>Screening support, not a final land-use record</span></footer>
     </div>
@@ -173,7 +190,7 @@ function App() {
 
 function Header({ activeView, queueCount, onNavigate }) {
   return (
-    <header className="site-header">
+    <header className="site-header liquid-glass">
       <div className="masthead">
         <button className="wordmark" onClick={() => onNavigate("briefing")} aria-label="TerraTrust home">
           <span className="wordmark-mark" aria-hidden="true">TT</span>
@@ -200,10 +217,11 @@ function Header({ activeView, queueCount, onNavigate }) {
 
 function Overview({ onStart }) {
   return (
-    <>
+    <div className="overview-screen">
+      <div className="terrain-field" aria-hidden="true"><span /><span /><span /></div>
       <section className="intro" aria-labelledby="intro-title">
         <p className="section-label">Responsible screening</p>
-        <h1 id="intro-title">Verify uncertain land-cover results before they move forward.</h1>
+        <h1 id="intro-title">Know when the model <em>needs a person.</em></h1>
         <div className="intro-bottom">
           <p>TerraTrust classifies one satellite scene at a time and holds uncertain or unfamiliar images for a person to verify.</p>
           <button className="text-action" onClick={onStart}>Start an analysis <ArrowRight size={17} aria-hidden="true" /></button>
@@ -214,7 +232,7 @@ function Overview({ onStart }) {
         <div><span>Check</span><p>Verify the class, calibrated confidence, and reason.</p></div>
         <div><span>Route</span><p>Move uncertain or unverified scenes to human verification.</p></div>
       </section>
-    </>
+    </div>
   );
 }
 

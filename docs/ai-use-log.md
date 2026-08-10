@@ -12,6 +12,7 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance | Product-interface de-stylization | Remove generated-looking visual conventions after direct human critique | Team must assign | Decorative hero, numbered navigation, agency labels, and oversized type removed; automated and visual QA rerun | Entry 4 |
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + local Iris Hackathon reference | Calm management-tool redesign | Match a concrete human-selected visual reference and remove the remaining generated-showcase patterns | Team must assign | Framer components removed from rendered UI; strict review returned 0 errors and 0 warnings; automated suites passed | Entry 5 |
 | 2026-08-09 | OpenAI Codex | Exceptional-rubric evidence consolidation | Make benchmarks, targets, SDG logic, scale assumptions, and remaining human gates obvious and auditable | Team must assign | Five measured/target metrics surfaced in-product; three evidence records added; tests and build rerun | Entry 6 |
+| 2026-08-09 | OpenAI Codex + user-supplied recreation prompt + UI/UX Pro Max + Framer Motion guidance | Reversible immersive editorial design variant | Adapt a cinematic reference to TerraTrust without changing product behavior | Team must assign | Separate branch created; all four workflows and evidence views preserved; automated suites rerun | Entry 7 |
 
 ## Entry 1
 
@@ -115,6 +116,17 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **Validation performed:** React interaction test, production build, Python test suite, source/diff inspection, and checks that projections and unmeasured outcomes are labeled.
 - **Measurable outcome:** Five performance targets or baselines are now visible together in the product; the scale plan documents six assumptions, three infrastructure phases, deployment gates, failure handling, and observability.
 - **Boundaries:** AI did not conduct user interviews, rehearse with the team, publish a video, verify participant eligibility, choose a partner, or claim conservation outcomes. Those remain explicitly incomplete.
+
+## Entry 7
+
+- **Date/time:** 2026-08-09
+- **Tools and references:** OpenAI Codex; user-supplied “RECREATION PROMPT”; UI/UX Pro Max local guidance; Framer Motion performance guidance. The 21st AI generator was attempted but its free generation limit was exhausted, so no generated 21st variant was used.
+- **Representative detailed prompt:** “Use the supplied cinematic black, Instrument Serif, liquid-glass, video-led landing-page prompt as a design reference for TerraTrust. Remove unrelated agency/signup content and costly autoplay video. Preserve Overview, Analyze, Human verification, Validation, every API behavior, accessibility, evidence, and limitations. Make the experiment fully reversible.”
+- **Human-directed decision:** The user selected the visual reference and explicitly required unchanged functionality and a safe undo path.
+- **Output used:** Dark editorial tokens, Instrument Serif headings, restrained glass header, CSS-only terrain atmosphere, and one reduced-motion-aware view entrance.
+- **Validation:** React interaction test, Python/API/model suite, production build, strict 21st code review, and source inspection for semantics and reduced-motion behavior.
+- **Measurable outcome:** One separate Git branch preserves rollback; no new external video payload was introduced; four destinations, five evidence rows, and the complete analysis/verification flow remain present.
+- **Boundaries:** The supplied video URLs, newsletter controls, generic agency sections, and unsupported promotional language were deliberately not used. Visual preference still requires human approval.
 
 ## Where AI was not used
 
