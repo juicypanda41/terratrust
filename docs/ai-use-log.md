@@ -160,6 +160,17 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 
 ## Where AI was not used
 
+## 2026-08-09 — Canva technical pitch-deck generation
+
+- **Tools:** OpenAI Codex and Canva presentation generation.
+- **Purpose:** Rebuild the TerraTrust Technical Track pitch deck around the six OurPlanet.Rocks judging criteria and a 2:40 spoken narrative.
+- **Representative prompt:** "Create a 10-slide, evidence-first TerraTrust deck for hackathon judges. Cover the problem and intended users, calibrated abstention workflow, working demo, held-out metrics, controlled robustness tests, reproducible architecture, SDG Targets 15.1 and 15.2, phased scalability, limitations, and transparent AI use. Use only verified repository evidence; distinguish measured results, projections, and unmeasured outcomes; avoid generic AI styling and fabricated feedback, partners, team details, or environmental impact."
+- **Output used:** A Canva presentation-generation job using the existing TerraTrust forest hero and three real held-out demo images.
+- **Rationale:** Canva was used to accelerate visual composition while the slide narrative, claims, timing, evidence boundaries, and rubric mapping were specified from the repository by Codex.
+- **Validation:** Deck claims were checked against `artifacts/metrics.json`, `MODEL_CARD.md`, `docs/metrics-evidence.md`, `docs/scalability-plan.md`, `docs/judging-scorecard.md`, and the live/repository links. Final visual review, team-name insertion, rehearsal timing, and submission approval remain human-owned.
+- **Measurable outcome:** The generation brief maps ten slides to all six Technical Track criteria and targets a 2:40 delivery. It uses measured figures of 91.4% accepted-case accuracy, 78.9% coverage, 21.1% verification rate, 0.87% post-calibration ECE, and 22.3 ms local CPU p95 latency.
+- **Boundaries:** AI did not conduct user interviews, verify participant eligibility, select a pilot partner, measure conservation outcomes, or submit the project. Canva generation does not guarantee a rubric score.
+
 Document human-owned work and the reason it stayed human-led, such as firsthand interviews, final ethical decisions, consent, source verification, judging claims, original team opinions, or final approval.
 
 | Work | Human owner | Why AI was not used | Evidence |
@@ -208,3 +219,12 @@ Document human-owned work and the reason it stayed human-led, such as firsthand 
 - **Validation:** Frontend interaction test and production build.
 - **Measurable outcome:** The opening screen now states the environmental problem, intended monitoring value, safety mechanism, and human role before the first interaction.
 - **Boundary:** No model result, environmental outcome, partnership, user feedback, or conservation impact was invented; the copy continues to distinguish measured screening performance from downstream impact.
+
+## 2026-08-09 - Website punctuation cleanup
+
+- **Tool:** Codex
+- **Purpose:** Remove em dashes from all user-facing website text.
+- **Output used:** Replaced the three em dashes in the page title, Overview copy, and Validation label with a pipe, comma, or standard sentence punctuation.
+- **Rationale:** Matches the requested writing style without changing meaning, layout, or functionality.
+- **Validation:** Repository-wide frontend search, interaction test, and production build.
+- **Boundary:** No product claims, metrics, behavior, or visual structure changed.

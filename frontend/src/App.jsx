@@ -217,7 +217,7 @@ function Overview({ onStart }) {
         <p className="section-label">Environmental decision support</p>
         <h1 id="intro-title">Keep uncertain predictions out of <em>environmental decisions.</em></h1>
         <div className="intro-bottom">
-          <p>Satellite imagery can help monitor forests, water, farms, and growing cities—but only when the evidence is trustworthy. TerraTrust screens land-cover scenes and directs uncertain results to a person before they enter a monitoring workflow.</p>
+          <p>Satellite imagery can help monitor forests, water, farms, and growing cities, but only when the evidence is trustworthy. TerraTrust screens land-cover scenes and directs uncertain results to a person before they enter a monitoring workflow.</p>
           <button className="text-action" onClick={onStart}>Start an analysis <ArrowRight size={17} aria-hidden="true" /></button>
         </div>
       </section>
@@ -363,7 +363,7 @@ function Validation({ data }) {
       </div>
       <div className="validation-layout">
         <article className="validation-section full-width evidence-section">
-          <SectionHeading title="Targets, evidence, and method" detail="Measured — not projected impact" />
+          <SectionHeading title="Targets, evidence, and method" detail="Measured, not projected impact" />
           <div className="table-wrap"><table>
             <thead><tr><th>Metric</th><th>Target</th><th>Result</th><th>Evidence method</th></tr></thead>
             <tbody>{evidenceRows.map((row) => <tr key={row.metric}><th scope="row">{row.metric}</th><td>{row.target}</td><td><strong>{row.result}</strong></td><td>{row.method}</td></tr>)}</tbody>
