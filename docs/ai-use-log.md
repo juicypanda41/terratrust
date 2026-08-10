@@ -184,5 +184,5 @@ Document human-owned work and the reason it stayed human-led, such as firsthand 
 - **Output used:** Removed unsupported same-application rewrites and the static-only output override; retained and bundled the frontend build; declared `api:app` as the FastAPI entrypoint; pinned pnpm 10.17.1 for the lockfile; and declared the Python runtime dependencies in `pyproject.toml` so the deployed function can load the image-processing model.
 - **Rationale:** TerraTrust already owns `/api`, `/demo-assets`, `/assets`, and the SPA fallback through native FastAPI routes. Vercel recommends native framework routing for backend framework projects.
 - **Validation:** Local production frontend build, Python test suite, repository configuration checks, remote Vercel build status, and live homepage/API requests.
-- **Measurable outcome:** Configuration validation no longer encounters the internal-rewrite conflict; deployment health and route checks remain pending until the remote build completes.
+- **Measurable outcome:** Production deployment reached `Ready`; `/api/health` returned `status: ok` with model and frontend ready, `/api/bootstrap` returned 20 demo records, and the Forest reference analysis returned `Forest` without human review.
 - **Boundary:** No model metrics, user evidence, or impact claims were generated or changed.
