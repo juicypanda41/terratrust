@@ -128,6 +128,15 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **Measurable outcome:** One separate Git branch preserves rollback; no new external video payload was introduced; four destinations, five evidence rows, and the complete analysis/verification flow remain present.
 - **Boundaries:** The supplied video URLs, newsletter controls, generic agency sections, and unsupported promotional language were deliberately not used. Visual preference still requires human approval.
 
+### GitHub and Vercel publishing support
+
+- **Date/time:** 2026-08-09
+- **Tools:** OpenAI Codex, GitHub integration, Vercel integration, Git, and Vercel documentation search.
+- **Purpose:** Publish the complete repository and deploy the working frontend/API/model as a judge-accessible site.
+- **Representative prompt:** “Put the current TerraTrust design on the GitHub repository and publish it on Vercel without changing the model or product behavior; verify the public API and application rather than assuming a successful build means a working demo.”
+- **Output used:** `vercel.json`, deployment documentation, Git remote/branch publication, and production deployment verification.
+- **Validation boundary:** Authentication and platform ownership remain human-controlled. Publication does not prove scale, reliability, or environmental impact.
+
 ## Where AI was not used
 
 Document human-owned work and the reason it stayed human-led, such as firsthand interviews, final ethical decisions, consent, source verification, judging claims, original team opinions, or final approval.

@@ -29,6 +29,19 @@ Push the public repository to GitHub, connect it to a container host, and verify
 
 No secrets are required. The evaluated model and evidence artifacts must remain under GitHub's per-file size limit.
 
+## Vercel deployment
+
+`vercel.json` builds the existing Vite application from `frontend/`, serves `frontend/dist` as the public site, and routes `/api/*` plus `/demo-assets/*` to the FastAPI entrypoint in `api.py`. The Python function bundle explicitly includes the evaluated model, metrics, and demonstration images.
+
+The Vercel deployment must be checked using all of these—not the homepage alone:
+
+- `GET /api/health` reports model and frontend readiness.
+- `GET /api/bootstrap` returns evidence and demo metadata.
+- `POST /api/analyze/demo/Forest_1.jpg` returns an inference result.
+- The root URL loads the React interface and Analyze can reach the same-origin API.
+
+The serverless deployment does not make the in-memory Human verification queue durable. Persistent multi-user verification requires the database and job-queue infrastructure described in `docs/scalability-plan.md`.
+
 ## Judge link check
 
 - Open the GitHub repository while signed out.
