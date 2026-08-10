@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd frontend && pnpm install --frozen-lockfile && pnpm build",
+  "buildCommand": "cd frontend && npx --yes pnpm@10.17.1 install --frozen-lockfile && npx --yes pnpm@10.17.1 build",
   "functions": {
     "api.py": {
       "includeFiles": "{artifacts/**,assets/demo_samples/**,frontend/dist/**}",
