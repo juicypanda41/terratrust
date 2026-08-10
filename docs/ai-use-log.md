@@ -197,3 +197,14 @@ Document human-owned work and the reason it stayed human-led, such as firsthand 
 - **Validation:** Documentation links, commands, metric values, API routes, and deployment URL checked against repository files and the live application; full backend, frontend, and production build checks run before commit.
 - **Measurable outcome:** The root README now provides one complete path from project purpose through local reproduction and deployment verification, with direct links to nine submission evidence files.
 - **Boundary:** No interface behavior, model behavior, evaluation output, or measured claim was changed. HeroVerse was not available locally or on the identified public GitHub account, so no unverifiable style details were copied.
+
+## 2026-08-09 — Purpose and impact copy
+
+- **Tool:** Codex
+- **Purpose:** Make TerraTrust's environmental purpose and decision-support value immediately clear on the website.
+- **Representative prompt:** "Edit the website and mention the real purpose, showing the strong impact it has and making it sound important."
+- **Output used:** Reframed the Overview around protecting environmental decisions from uncertain predictions, explained how the workflow focuses limited human attention, strengthened the evidence-to-monitoring theory of change, and clarified the connection to SDG targets 15.1 and 15.2.
+- **Rationale:** Supports Innovation & Impact, SDG Alignment, and Presentation Quality with a clearer problem-to-solution-to-impact story.
+- **Validation:** Frontend interaction test and production build.
+- **Measurable outcome:** The opening screen now states the environmental problem, intended monitoring value, safety mechanism, and human role before the first interaction.
+- **Boundary:** No model result, environmental outcome, partnership, user feedback, or conservation impact was invented; the copy continues to distinguish measured screening performance from downstream impact.

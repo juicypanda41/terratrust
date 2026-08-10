@@ -183,7 +183,7 @@ function App() {
           </m.div>
         </LazyMotion>
       </main>
-      <footer><span>TerraTrust</span><span>Screening support, not a final land-use record</span></footer>
+      <footer><span>TerraTrust</span><span>Better evidence for land and ecosystem monitoring</span></footer>
     </div>
   );
 }
@@ -214,17 +214,17 @@ function Overview({ onStart }) {
     <div className="overview-screen">
       <div className="terrain-field" aria-hidden="true" />
       <section className="intro" aria-labelledby="intro-title">
-        <p className="section-label">Responsible screening</p>
-        <h1 id="intro-title">Land-cover analysis that makes <em>uncertainty visible.</em></h1>
+        <p className="section-label">Environmental decision support</p>
+        <h1 id="intro-title">Keep uncertain predictions out of <em>environmental decisions.</em></h1>
         <div className="intro-bottom">
-          <p>TerraTrust classifies one satellite scene at a time and holds uncertain or unfamiliar images for a person to verify.</p>
+          <p>Satellite imagery can help monitor forests, water, farms, and growing cities—but only when the evidence is trustworthy. TerraTrust screens land-cover scenes and directs uncertain results to a person before they enter a monitoring workflow.</p>
           <button className="text-action" onClick={onStart}>Start an analysis <ArrowRight size={17} aria-hidden="true" /></button>
         </div>
       </section>
-      <section className="overview-list" aria-label="How TerraTrust works">
-        <div><span>Analyze</span><p>Choose a reference scene or upload an RGB image.</p></div>
-        <div><span>Check</span><p>Verify the class, calibrated confidence, and reason.</p></div>
-        <div><span>Route</span><p>Move uncertain or unverified scenes to human verification.</p></div>
+      <section className="overview-list" aria-label="Why TerraTrust matters">
+        <div><span>Screen</span><p>Turn satellite scenes into consistent land-cover classifications.</p></div>
+        <div><span>Protect</span><p>Stop uncertain or unfamiliar imagery from passing as a trusted result.</p></div>
+        <div><span>Focus</span><p>Direct limited human attention to the scenes that matter most for monitoring.</p></div>
       </section>
     </div>
   );
@@ -354,7 +354,7 @@ function Validation({ data }) {
   ];
   return (
     <section aria-labelledby="validation-title">
-      <PageIntro label="Validation" title="Performance and limits" description="Measured results from the held-out evaluation, alongside the boundaries of the current prototype." titleId="validation-title" />
+      <PageIntro label="Validation" title="Evidence before action" description="Measured reliability, review workload, and limitations behind every result TerraTrust allows into a monitoring workflow." titleId="validation-title" />
       <div className="metric-strip" aria-label="Headline metrics">
         <Metric label="Overall accuracy" value={pct(metrics.accuracy)} />
         <Metric label="Macro F1" value={pct(metrics.macro_f1)} />
@@ -396,14 +396,14 @@ function Validation({ data }) {
         <article className="validation-section full-width limits-section">
           <div><SectionHeading title="Current boundaries" detail="Use with expert judgment" /><h2>What TerraTrust does not claim</h2></div>
           <ul>{PUBLIC_LIMITATIONS.map((limit) => <li key={limit}>{limit}</li>)}</ul>
-          <div className="sdg-note"><FlaskConical size={18} aria-hidden="true" /><p><strong>SDG 15.1 and 15.2:</strong> TerraTrust supports a screening workflow. It does not claim measured conservation or deforestation outcomes.</p></div>
+          <div className="sdg-note"><FlaskConical size={18} aria-hidden="true" /><p><strong>SDG 15.1 and 15.2:</strong> Reliable land-cover evidence supports ecosystem and forest monitoring. TerraTrust strengthens that upstream screening step without claiming measured conservation outcomes.</p></div>
         </article>
         <article className="validation-section full-width impact-section">
           <SectionHeading title="SDG contribution" detail="Targets 15.1 and 15.2" />
           <div className="impact-chain" aria-label="TerraTrust theory of change">
-            <div><span>01</span><strong>Screen imagery</strong><p>Classify land-cover scenes with calibrated confidence.</p></div>
-            <div><span>02</span><strong>Direct attention</strong><p>Send uncertain scenes to human verification.</p></div>
-            <div><span>03</span><strong>Support monitoring</strong><p>Prepare more reliable inputs for ecosystem and forest workflows.</p></div>
+            <div><span>01</span><strong>Establish evidence</strong><p>Classify land-cover scenes with measured, calibrated confidence.</p></div>
+            <div><span>02</span><strong>Protect decisions</strong><p>Keep uncertain scenes from advancing without human verification.</p></div>
+            <div><span>03</span><strong>Strengthen monitoring</strong><p>Give environmental teams clearer, review-ready inputs for ecosystem and forest workflows.</p></div>
           </div>
           <p className="provenance-note">Measured today: model reliability and verification workload. Not yet measured: changes in conservation, forest area, or SDG indicators.</p>
         </article>
