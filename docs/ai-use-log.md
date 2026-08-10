@@ -175,3 +175,14 @@ Document human-owned work and the reason it stayed human-led, such as firsthand 
 - [ ] Generated code/content was reviewed and tested by a team member.
 - [ ] AI contributions are attributed honestly and do not misrepresent originality.
 - [ ] Prompts, rationale, outcomes, and non-AI boundaries are ready to summarize in the pitch.
+
+## 2026-08-09 — Vercel FastAPI deployment repair
+
+- **Tool:** Codex with Vercel deployment guidance and official Vercel documentation
+- **Purpose:** Diagnose the failed Git-connected production deployment shown in Vercel's build log.
+- **Representative prompt:** "Deployment failed with error" with a screenshot showing Vercel's backend-framework internal-rewrite warning.
+- **Output used:** Removed unsupported same-application rewrites and the static-only output override; retained the frontend build, explicitly bundled its output with the FastAPI function, and allowlisted Vite's required `esbuild` install script under pnpm's dependency-build policy.
+- **Rationale:** TerraTrust already owns `/api`, `/demo-assets`, `/assets`, and the SPA fallback through native FastAPI routes. Vercel recommends native framework routing for backend framework projects.
+- **Validation:** Local production frontend build, Python test suite, and repository configuration checks; production URL verification is recorded after Vercel completes the Git-triggered redeployment.
+- **Measurable outcome:** Configuration validation no longer encounters the internal-rewrite conflict; deployment health and route checks remain pending until the remote build completes.
+- **Boundary:** No model metrics, user evidence, or impact claims were generated or changed.

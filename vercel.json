@@ -1,25 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "cd frontend && pnpm install --frozen-lockfile && pnpm build",
-  "outputDirectory": "frontend/dist",
   "functions": {
     "api.py": {
-      "includeFiles": "{artifacts/**,assets/demo_samples/**}",
+      "includeFiles": "{artifacts/**,assets/demo_samples/**,frontend/dist/**}",
       "maxDuration": 30
     }
-  },
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/api.py"
-    },
-    {
-      "source": "/demo-assets/:path*",
-      "destination": "/api.py"
-    },
-    {
-      "source": "/:path*",
-      "destination": "/index.html"
-    }
-  ]
+  }
 }
