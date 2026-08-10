@@ -1,8 +1,6 @@
-import { AnimatePresence, m } from "framer-motion";
 import {
   ArrowRight,
   Check,
-  ChevronRight,
   CircleAlert,
   FileCheck2,
   FlaskConical,
@@ -20,18 +18,6 @@ const NAV_ITEMS = [
   { id: "evidence", label: "Validation" },
 ];
 
-const viewVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.24, ease: "easeOut" } },
-  exit: { opacity: 0, y: -6, transition: { duration: 0.14, ease: "easeIn" } },
-};
-
-const resultVariants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.22, ease: "easeOut" } },
-  exit: { opacity: 0, transition: { duration: 0.12 } },
-};
-
 const PUBLIC_LIMITATIONS = [
   "Classifies whole scenes, not exact boundaries or area.",
   "Assesses one image at a time; it does not claim to detect change.",
@@ -48,7 +34,10 @@ async function readJson(response) {
 }
 
 function App() {
-  const [activeView, setActiveView] = useState("briefing");
+  const [activeView, setActiveView] = useState(() => {
+    const hash = window.location.hash.replace("#", "");
+    return NAV_ITEMS.some((item) => item.id === hash) ? hash : "briefing";
+  });
   const [data, setData] = useState(null);
   const [loadError, setLoadError] = useState("");
   const [selectedDemo, setSelectedDemo] = useState(null);
@@ -81,7 +70,9 @@ function App() {
   const selectView = (view) => {
     setActiveView(view);
     window.history.replaceState(null, "", `#${view}`);
-    document.getElementById("main-content")?.focus({ preventScroll: true });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    requestAnimationFrame(() => document.getElementById("main-content")?.focus({ preventScroll: true }));
   };
 
   const chooseDemo = (demo) => {
@@ -117,7 +108,7 @@ function App() {
       } else if (selectedDemo) {
         response = await fetch(`/api/analyze/demo/${encodeURIComponent(selectedDemo.file)}`, { method: "POST" });
       } else {
-        throw new Error("Choose a demo tile or upload an image first.");
+        throw new Error("Choose a reference scene or upload an image first.");
       }
       setResult(await readJson(response));
     } catch (error) {
@@ -129,7 +120,7 @@ function App() {
 
   const addToQueue = () => {
     if (!result) return;
-    const source = selectedDemo?.file || uploadedFile?.name || "Uploaded tile";
+    const source = selectedDemo?.file || uploadedFile?.name || "Uploaded scene";
     setQueue((current) => {
       if (current.some((item) => item.source === source)) return current;
       return [...current, { id: `${source}-${Date.now()}`, source, result, preview: selectedDemo?.image_url || previewUrl }];
@@ -139,51 +130,43 @@ function App() {
 
   const removeFromQueue = (id) => setQueue((current) => current.filter((item) => item.id !== id));
 
-  if (loadError) {
-    return <SystemError message={loadError} />;
-  }
+  if (loadError) return <SystemError message={loadError} />;
 
   if (!data) {
     return (
       <div className="loading-shell" role="status" aria-live="polite">
         <LoaderCircle className="spin" aria-hidden="true" />
-        <span>Loading evaluated model evidence…</span>
+        <span>Opening TerraTrust...</span>
       </div>
     );
   }
 
   return (
-    <div className="app-shell">
+    <div className="site-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <Header activeView={activeView} queueCount={queue.length} onNavigate={selectView} />
-      <main id="main-content" className="page-frame" tabIndex="-1">
-        <AnimatePresence mode="wait" initial={false}>
-          <m.div key={activeView} variants={viewVariants} initial="hidden" animate="visible" exit="exit">
-            {activeView === "briefing" && <Briefing demo={featuredDemos[0]} onStart={() => selectView("screen")} />}
-            {activeView === "screen" && (
-              <ScreenTile
-                demos={featuredDemos}
-                selectedDemo={selectedDemo}
-                uploadedFile={uploadedFile}
-                previewUrl={previewUrl}
-                fileInput={fileInput}
-                result={result}
-                analyzing={analyzing}
-                error={analysisError}
-                onChooseDemo={chooseDemo}
-                onChooseUpload={chooseUpload}
-                onAnalyze={runAnalysis}
-                onQueue={addToQueue}
-              />
-            )}
-            {activeView === "queue" && <ReviewQueue items={queue} onScreen={() => selectView("screen")} onRemove={removeFromQueue} />}
-            {activeView === "evidence" && <Evidence data={data} />}
-          </m.div>
-        </AnimatePresence>
+      <main id="main-content" tabIndex="-1">
+        {activeView === "briefing" && <Overview onStart={() => selectView("screen")} />}
+        {activeView === "screen" && (
+          <Analyze
+            demos={featuredDemos}
+            selectedDemo={selectedDemo}
+            uploadedFile={uploadedFile}
+            previewUrl={previewUrl}
+            fileInput={fileInput}
+            result={result}
+            analyzing={analyzing}
+            error={analysisError}
+            onChooseDemo={chooseDemo}
+            onChooseUpload={chooseUpload}
+            onAnalyze={runAnalysis}
+            onQueue={addToQueue}
+          />
+        )}
+        {activeView === "queue" && <ReviewQueue items={queue} onAnalyze={() => selectView("screen")} onRemove={removeFromQueue} />}
+        {activeView === "evidence" && <Validation data={data} />}
       </main>
-      <footer className="site-footer">
-        <span>TerraTrust</span>
-        <span>Responsible land-cover screening</span>
-      </footer>
+      <footer><span>TerraTrust</span><span>Screening support, not a final land-use record</span></footer>
     </div>
   );
 }
@@ -191,10 +174,13 @@ function App() {
 function Header({ activeView, queueCount, onNavigate }) {
   return (
     <header className="site-header">
-      <button className="wordmark" onClick={() => onNavigate("briefing")} aria-label="TerraTrust home">
-        <span className="wordmark-mark" aria-hidden="true"><span /></span>
-        <span>TerraTrust</span>
-      </button>
+      <div className="masthead">
+        <button className="wordmark" onClick={() => onNavigate("briefing")} aria-label="TerraTrust home">
+          <span className="wordmark-mark" aria-hidden="true">TT</span>
+          <span>TerraTrust</span>
+        </button>
+        <span className="masthead-note">Land-cover review</span>
+      </div>
       <nav className="primary-nav" aria-label="Primary navigation">
         {NAV_ITEMS.map((item) => (
           <button
@@ -204,7 +190,7 @@ function Header({ activeView, queueCount, onNavigate }) {
             aria-current={activeView === item.id ? "page" : undefined}
           >
             {item.label}
-            {item.id === "queue" && queueCount > 0 && <b aria-label={`${queueCount} queued`}>{queueCount}</b>}
+            {item.id === "queue" && queueCount > 0 && <span className="queue-count" aria-label={`${queueCount} queued`}>{queueCount}</span>}
           </button>
         ))}
       </nav>
@@ -212,191 +198,167 @@ function Header({ activeView, queueCount, onNavigate }) {
   );
 }
 
-function Briefing({ demo, onStart }) {
+function Overview({ onStart }) {
   return (
     <>
-      <section className="home-hero" aria-labelledby="hero-heading">
-        <div className="hero-copy">
-          <p className="product-label">Responsible land-cover screening</p>
-          <h1 id="hero-heading">Land-cover screening with a human checkpoint.</h1>
-          <p className="hero-summary">
-            TerraTrust classifies satellite scenes and sends uncertain cases to review, with the reason attached.
-          </p>
-          <m.button className="primary-action" onClick={onStart} whileTap={{ scale: 0.98 }}>
-            Analyze a scene <ArrowRight size={18} aria-hidden="true" />
-          </m.button>
+      <section className="intro" aria-labelledby="intro-title">
+        <p className="section-label">Responsible screening</p>
+        <h1 id="intro-title">Review uncertain land-cover results before they move forward.</h1>
+        <div className="intro-bottom">
+          <p>TerraTrust classifies one satellite scene at a time and holds uncertain or unfamiliar images for a person to review.</p>
+          <button className="text-action" onClick={onStart}>Start a review <ArrowRight size={17} aria-hidden="true" /></button>
         </div>
-        {demo && (
-          <button className="scene-preview" onClick={onStart} aria-label={`Analyze reference scene: ${demo.story}`}>
-            <img src={demo.image_url} width="560" height="560" alt={`${demo.story}, reference land-cover scene`} />
-            <span className="scene-preview-caption">
-              <span><strong>{demo.story}</strong><small>Reference scene</small></span>
-              <ArrowRight size={20} aria-hidden="true" />
-            </span>
-          </button>
-        )}
       </section>
-
-      <section className="home-workflow" aria-labelledby="workflow-heading">
-        <h2 id="workflow-heading">Clear scenes move. Uncertain scenes wait.</h2>
-        <dl className="workflow-list">
-          <div><dt>Clear result</dt><dd>Continue with the land-cover classification.</dd></div>
-          <div><dt>Uncertain result</dt><dd>Send the scene to review with an explanation.</dd></div>
-          <div><dt>Unverified source</dt><dd>Keep the scene in review until its origin is confirmed.</dd></div>
-        </dl>
+      <section className="overview-list" aria-label="How TerraTrust works">
+        <div><span>Analyze</span><p>Choose a reference scene or upload an RGB image.</p></div>
+        <div><span>Check</span><p>Review the class, calibrated confidence, and reason.</p></div>
+        <div><span>Route</span><p>Move uncertain or unverified scenes into the review queue.</p></div>
       </section>
     </>
   );
 }
 
-function ScreenTile({ demos, selectedDemo, uploadedFile, previewUrl, fileInput, result, analyzing, error, onChooseDemo, onChooseUpload, onAnalyze, onQueue }) {
+function Analyze({ demos, selectedDemo, uploadedFile, previewUrl, fileInput, result, analyzing, error, onChooseDemo, onChooseUpload, onAnalyze, onQueue }) {
   const imageSource = selectedDemo?.image_url || previewUrl;
   const imageAlt = selectedDemo ? `${selectedDemo.story}, reference scene labeled ${selectedDemo.display_label}` : `Uploaded scene ${uploadedFile?.name || ""}`;
   return (
-    <section aria-labelledby="screen-heading">
-      <PageIntro eyebrow="Analysis" title="Analyze a scene" description="Choose a reference scene or upload an RGB image. New imagery stays in review until its source is verified." />
-      <div className="screen-layout">
-        <div className="input-column">
+    <section aria-labelledby="analyze-title">
+      <PageIntro label="Analyze" title="Land-cover review" description="Choose a reference scene or upload an image. New sources stay in review until their origin is verified." titleId="analyze-title" />
+      <div className="workspace">
+        <div className="source-panel">
+          <div className="panel-heading"><span>Source</span><span>{uploadedFile ? "Uploaded image" : "Reference scene"}</span></div>
           <fieldset className="demo-selector">
-            <legend>Choose a reference scene</legend>
-            {demos.map((demo) => (
-              <button key={demo.file} className={selectedDemo?.file === demo.file ? "demo-row selected" : "demo-row"} onClick={() => onChooseDemo(demo)} aria-pressed={selectedDemo?.file === demo.file}>
-                <img src={demo.image_url} width="64" height="64" alt="" />
-                <span><strong>{demo.story}</strong><small>Reference: {demo.display_label}</small></span>
-                <ChevronRight size={18} aria-hidden="true" />
-              </button>
-            ))}
+            <legend>Examples</legend>
+            <div className="demo-options">
+              {demos.map((demo) => (
+                <button key={demo.file} className={selectedDemo?.file === demo.file ? "demo-option selected" : "demo-option"} onClick={() => onChooseDemo(demo)} aria-pressed={selectedDemo?.file === demo.file}>
+                  <img src={demo.image_url} width="56" height="56" alt="" />
+                  <span><strong>{demo.story}</strong><small>{demo.display_label}</small></span>
+                </button>
+              ))}
+            </div>
           </fieldset>
-          <div className="upload-block">
-            <input ref={fileInput} hidden id="tile-upload" type="file" accept="image/jpeg,image/png,image/webp" onChange={onChooseUpload} />
-            <button className="secondary-action" onClick={() => fileInput.current?.click()}>
-              <ImagePlus size={18} aria-hidden="true" /> {uploadedFile ? "Choose another image" : "Upload an RGB image"}
-            </button>
-            <p>JPEG, PNG, or WebP / maximum 10 MB</p>
-          </div>
-        </div>
-
-        <div className="analysis-stage">
           <div className="image-stage">
-            {imageSource ? <img src={imageSource} width="512" height="512" alt={imageAlt} /> : <div className="empty-image"><ScanSearch aria-hidden="true" /><span>No tile selected</span></div>}
-            <div className="image-caption"><span>{selectedDemo?.file || uploadedFile?.name || "Awaiting input"}</span><span>Analysis frame</span></div>
+            {imageSource ? <img src={imageSource} width="512" height="512" alt={imageAlt} /> : <div className="empty-image"><ScanSearch aria-hidden="true" /><span>No image selected</span></div>}
+            <div className="image-meta"><span>{selectedDemo?.file || uploadedFile?.name || "No source"}</span></div>
           </div>
-          <m.button className="primary-action full" onClick={onAnalyze} disabled={analyzing || !imageSource} whileTap={{ scale: 0.99 }}>
-            {analyzing ? <><LoaderCircle className="spin" size={18} aria-hidden="true" /> Screening…</> : <><ScanSearch size={18} aria-hidden="true" /> Run screening</>}
-          </m.button>
-          {error && <div className="error-message" role="alert"><CircleAlert size={18} aria-hidden="true" /> <span>{error} Try another file or restart the local server.</span></div>}
+          <div className="source-actions">
+            <input ref={fileInput} className="visually-hidden" id="scene-upload" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Upload satellite scene" onChange={onChooseUpload} />
+            <button className="secondary-action" onClick={() => fileInput.current?.click()}><ImagePlus size={17} aria-hidden="true" />{uploadedFile ? "Replace image" : "Upload image"}</button>
+            <button className="primary-action" onClick={onAnalyze} disabled={analyzing || !imageSource}>
+              {analyzing ? <><LoaderCircle className="spin" size={17} aria-hidden="true" />Analyzing...</> : <>Run analysis <ArrowRight size={17} aria-hidden="true" /></>}
+            </button>
+          </div>
+          <p className="file-note">JPEG, PNG, or WebP. Maximum 10 MB.</p>
+          {error && <div className="error-message" role="alert"><CircleAlert size={18} aria-hidden="true" /><span>{error} Try another image or restart the local server.</span></div>}
         </div>
-
-        <div className="result-column" aria-live="polite">
-          <AnimatePresence mode="wait">
-            {result ? (
-              <m.div key={`${result.predicted_class}-${result.confidence}`} variants={resultVariants} initial="hidden" animate="visible" exit="exit">
-                <ResultPanel result={result} onQueue={onQueue} />
-              </m.div>
-            ) : (
-              <div className="result-empty">
-                <h2>The decision appears here.</h2>
-                <p>Predicted class, calibrated confidence, review reason, runner-up, latency, and every class probability remain visible.</p>
-              </div>
-            )}
-          </AnimatePresence>
+        <div className="workspace-result" aria-live="polite">
+          {result ? <ResultPanel result={result} onQueue={onQueue} /> : <EmptyResult />}
         </div>
       </div>
     </section>
+  );
+}
+
+function EmptyResult() {
+  return (
+    <div className="result-empty">
+      <ScanSearch size={22} aria-hidden="true" />
+      <h2>No result yet</h2>
+      <p>Choose a scene and run the analysis. The classification, confidence, and review decision will appear here.</p>
+    </div>
   );
 }
 
 function ResultPanel({ result, onQueue }) {
   return (
     <div className="result-panel">
-      <div className={result.requires_review ? "decision-tag review" : "decision-tag accept"}>
-        {result.requires_review ? <CircleAlert size={17} aria-hidden="true" /> : <Check size={17} aria-hidden="true" />}
-        {result.requires_review ? "Human review required" : "Eligible for auto-acceptance"}
+      <div className="result-title">
+        <div><span>Land cover</span><h2>{result.predicted_display}</h2></div>
+        <div className={result.requires_review ? "decision review" : "decision accept"}>
+          {result.requires_review ? <CircleAlert size={15} aria-hidden="true" /> : <Check size={15} aria-hidden="true" />}
+          {result.requires_review ? "Review required" : "Ready to continue"}
+        </div>
       </div>
-      <h2>{result.predicted_display}</h2>
-      <div className="confidence-line"><strong>{pct(result.confidence)}</strong><span>calibrated confidence</span></div>
+      <div className="confidence"><strong>{pct(result.confidence)}</strong><span>calibrated confidence</span></div>
       <p className="review-reason">{result.review_reason}</p>
       <dl className="result-details">
         <div><dt>Runner-up</dt><dd>{result.second_display} / {pct(result.second_confidence)}</dd></div>
         <div><dt>Local inference</dt><dd>{result.latency_ms.toFixed(1)} ms</dd></div>
       </dl>
-      <h3>Class probabilities</h3>
-      <div className="probability-list" aria-label="Class probability comparison">
-        {result.probabilities.map((item) => (
-          <div className="probability-row" key={item.class_name}>
-            <span>{item.display_name}</span>
-            <div className="bar-track" aria-hidden="true"><span style={{ transform: `scaleX(${item.probability})` }} /></div>
-            <strong>{pct(item.probability)}</strong>
-          </div>
-        ))}
+      <div className="probability-section">
+        <h3>Class probabilities</h3>
+        <div className="probability-list" aria-label="Class probability comparison">
+          {result.probabilities.map((item) => (
+            <div className="probability-row" key={item.class_name}>
+              <span>{item.display_name}</span>
+              <div className="bar-track" aria-hidden="true"><span style={{ transform: `scaleX(${item.probability})` }} /></div>
+              <strong>{pct(item.probability)}</strong>
+            </div>
+          ))}
+        </div>
       </div>
-      {result.requires_review && <m.button className="queue-action" onClick={onQueue} whileTap={{ scale: 0.98 }}><FileCheck2 size={18} aria-hidden="true" /> Add to review queue</m.button>}
+      {result.requires_review && <button className="queue-action" onClick={onQueue}><FileCheck2 size={17} aria-hidden="true" />Add to review queue</button>}
     </div>
   );
 }
 
-function ReviewQueue({ items, onScreen, onRemove }) {
+function ReviewQueue({ items, onAnalyze, onRemove }) {
   return (
-    <section aria-labelledby="queue-heading">
-      <PageIntro eyebrow="Human checkpoint" title="Review queue" description="Flagged scenes arrive with the classification, uncertainty, and review reason intact." />
+    <section aria-labelledby="review-title">
+      <PageIntro label="Review" title="Review queue" description="Scenes that need a person stay here with their source, confidence, and review reason." titleId="review-title" />
       {items.length === 0 ? (
-        <div className="queue-empty">
-          <FileCheck2 size={28} aria-hidden="true" />
-          <h2>No scenes are waiting.</h2>
-          <p>Run the ambiguous reference scene to exercise the handoff.</p>
-          <button className="secondary-action" onClick={onScreen}>Go to analysis <ArrowRight size={18} aria-hidden="true" /></button>
+        <div className="quiet-empty">
+          <FileCheck2 size={22} aria-hidden="true" />
+          <h2>Nothing is waiting</h2>
+          <p>Analyze the ambiguous reference scene to test the handoff.</p>
+          <button className="text-action" onClick={onAnalyze}>Go to analysis <ArrowRight size={17} aria-hidden="true" /></button>
         </div>
       ) : (
         <div className="queue-list">
-          <div className="queue-header"><span>{items.length.toString().padStart(2, "0")} pending</span><span>Human disposition required</span></div>
-          <AnimatePresence initial={false}>
-            {items.map((item) => (
-              <m.article key={item.id} className="queue-item" variants={resultVariants} initial="hidden" animate="visible" exit="exit">
-                <img src={item.preview} width="96" height="96" alt={`Queued satellite tile ${item.source}`} />
-                <div><span className="queue-source">{item.source}</span><h2>{item.result.predicted_display}</h2><p>{item.result.review_reason}</p></div>
-                <div className="queue-confidence"><strong>{pct(item.result.confidence)}</strong><span>confidence</span></div>
-                <button className="icon-button" onClick={() => onRemove(item.id)} aria-label={`Remove ${item.source} from review queue`}><X size={20} aria-hidden="true" /></button>
-              </m.article>
-            ))}
-          </AnimatePresence>
+          <div className="queue-heading"><span>{items.length} waiting</span><span>Human review</span></div>
+          {items.map((item) => (
+            <article key={item.id} className="queue-item">
+              <img src={item.preview} width="88" height="88" alt={`Queued satellite scene ${item.source}`} />
+              <div className="queue-copy"><span>{item.source}</span><h2>{item.result.predicted_display}</h2><p>{item.result.review_reason}</p></div>
+              <div className="queue-confidence"><strong>{pct(item.result.confidence)}</strong><span>confidence</span></div>
+              <button className="icon-button" onClick={() => onRemove(item.id)} aria-label={`Remove ${item.source} from review queue`}><X size={19} aria-hidden="true" /></button>
+            </article>
+          ))}
         </div>
       )}
     </section>
   );
 }
 
-function Evidence({ data }) {
+function Validation({ data }) {
   const { metrics, robustness, risk_coverage: riskCoverage } = data;
-  const target = metrics.target_selective_accuracy;
   return (
-    <section aria-labelledby="evidence-heading">
-      <PageIntro eyebrow="Validation" title="Performance and limits" description="Performance, safeguards, and boundaries stay visible for anyone who wants to inspect them." />
-      <div className="evidence-grid">
-        <article className="evidence-block wide">
-          <div className="block-heading"><span>Accuracy / coverage trade-off</span><span>Validation-selected threshold: {pct(metrics.threshold, 0)}</span></div>
+    <section aria-labelledby="validation-title">
+      <PageIntro label="Validation" title="Performance and limits" description="Measured results from the held-out evaluation, alongside the boundaries of the current prototype." titleId="validation-title" />
+      <div className="metric-strip" aria-label="Headline metrics">
+        <Metric label="Overall accuracy" value={pct(metrics.accuracy)} />
+        <Metric label="Macro F1" value={pct(metrics.macro_f1)} />
+        <Metric label="Accepted-case accuracy" value={pct(metrics.selective_accuracy)} />
+        <Metric label="Coverage" value={pct(metrics.coverage)} />
+      </div>
+      <div className="validation-layout">
+        <article className="validation-section curve-section">
+          <SectionHeading title="Accuracy and coverage" detail={`Threshold ${pct(metrics.threshold, 0)}`} />
           <RiskCurve rows={riskCoverage} threshold={metrics.threshold} />
-          <p className="chart-note">Higher thresholds trade automation for accuracy. The selected policy also applies a separate image-quality check, so final coverage differs from confidence-only points.</p>
+          <p className="note">A stricter threshold sends more scenes to review. The complete policy also checks image quality.</p>
         </article>
-        <article className="evidence-block">
-          <div className="block-heading"><span>Measured benchmark</span><span>Held-out test / n={metrics.test_count.toLocaleString()}</span></div>
-          <div className="benchmark-list">
-            <Benchmark label="Overall accuracy" value={metrics.accuracy} />
-            <Benchmark label="Macro F1" value={metrics.macro_f1} />
-            <Benchmark label="Accepted-case accuracy" value={metrics.selective_accuracy} target={target} />
-            <Benchmark label="Coverage" value={metrics.coverage} />
+        <article className="validation-section calibration-section">
+          <SectionHeading title="Calibration" detail={`Held-out test, n=${metrics.test_count.toLocaleString()}`} />
+          <div className="calibration-values">
+            <div><span>Before</span><strong>{pct(metrics.ece_before, 2)}</strong></div>
+            <ArrowRight size={18} aria-hidden="true" />
+            <div><span>After</span><strong>{pct(metrics.ece_after, 2)}</strong></div>
           </div>
+          <p className="note">Expected calibration error. Lower is better.</p>
         </article>
-        <article className="evidence-block">
-          <div className="block-heading"><span>Calibration</span><span>Expected calibration error</span></div>
-          <div className="calibration-compare">
-            <div><strong>{pct(metrics.ece_before, 2)}</strong><span>Before</span></div>
-            <ArrowRight aria-hidden="true" />
-            <div><strong>{pct(metrics.ece_after, 2)}</strong><span>After temperature scaling</span></div>
-          </div>
-          <p className="chart-note">Lower is better. Calibration uses validation data; the result shown here is held-out.</p>
-        </article>
-        <article className="evidence-block wide">
-          <div className="block-heading"><span>Controlled quality stress test</span><span>Not general out-of-distribution proof</span></div>
+        <article className="validation-section full-width">
+          <SectionHeading title="Controlled quality checks" detail="Not proof of general real-world robustness" />
           <div className="table-wrap">
             <table>
               <thead><tr><th>Condition</th><th>Samples</th><th>Accuracy</th><th>Review rate</th><th>Quality alerts</th></tr></thead>
@@ -404,21 +366,22 @@ function Evidence({ data }) {
             </table>
           </div>
         </article>
-        <article className="evidence-block wide limits-block">
-          <div>
-            <p className="page-eyebrow">Boundaries</p>
-            <h2>What TerraTrust does not claim.</h2>
-          </div>
+        <article className="validation-section full-width limits-section">
+          <div><SectionHeading title="Current boundaries" detail="Use with expert judgment" /><h2>What TerraTrust does not claim</h2></div>
           <ul>{PUBLIC_LIMITATIONS.map((limit) => <li key={limit}>{limit}</li>)}</ul>
-          <div className="sdg-note"><FlaskConical size={20} aria-hidden="true" /><p><strong>SDG 15.1 and 15.2 alignment:</strong> TerraTrust is an enabling screening workflow. The prototype measures reliability and review workload—not conservation, deforestation, acreage, carbon, or biodiversity outcomes.</p></div>
+          <div className="sdg-note"><FlaskConical size={18} aria-hidden="true" /><p><strong>SDG 15.1 and 15.2:</strong> TerraTrust supports a screening workflow. It does not claim measured conservation or deforestation outcomes.</p></div>
         </article>
       </div>
     </section>
   );
 }
 
-function Benchmark({ label, value, target }) {
-  return <div className="benchmark-row"><div><span>{label}</span><strong>{pct(value)}</strong></div><div className="benchmark-track" aria-hidden="true"><span style={{ transform: `scaleX(${value})` }} />{target && <i style={{ left: `${target * 100}%` }} />}</div>{target && <small>Target {pct(target, 0)}</small>}</div>;
+function Metric({ label, value }) {
+  return <div><span>{label}</span><strong>{value}</strong></div>;
+}
+
+function SectionHeading({ title, detail }) {
+  return <div className="section-heading"><h2>{title}</h2><span>{detail}</span></div>;
 }
 
 function RiskCurve({ rows, threshold }) {
@@ -445,12 +408,12 @@ function RiskCurve({ rows, threshold }) {
   );
 }
 
-function PageIntro({ eyebrow, title, description }) {
-  return <header className="page-intro"><div><p className="page-eyebrow">{eyebrow}</p><h1>{title}</h1></div><p>{description}</p></header>;
+function PageIntro({ label, title, description, titleId }) {
+  return <header className="page-intro"><div><p className="section-label">{label}</p><h1 id={titleId}>{title}</h1></div><p>{description}</p></header>;
 }
 
 function SystemError({ message }) {
-  return <main className="system-error"><CircleAlert aria-hidden="true" /><h1>TerraTrust could not start.</h1><p role="alert">{message}</p><code>python -m uvicorn api:app --port 8501</code></main>;
+  return <main className="system-error"><CircleAlert aria-hidden="true" /><h1>TerraTrust could not start</h1><p role="alert">{message}</p><code>python -m uvicorn api:app --port 8501</code></main>;
 }
 
 export default App;

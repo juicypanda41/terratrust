@@ -173,7 +173,7 @@ Recommended hackathon stack:
 - Python and scikit-learn for the evaluated model.
 - FastAPI for a small typed model bridge and one production URL.
 - React/Vite for a semantic, responsive presentation layer.
-- Framer Motion for purposeful state transitions only.
+- Static React state changes with CSS loading and focus feedback only.
 - Native SVG and HTML tables for accessible evidence displays.
 - Pytest for preprocessing, inference-shape, threshold, and API/UI helper tests.
 - JSON/CSV artifacts for reproducible metrics and demo examples.

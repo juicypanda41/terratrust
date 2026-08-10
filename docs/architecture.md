@@ -19,8 +19,8 @@ flowchart LR
 ## Decisions
 
 - **React/Vite + FastAPI:** separates presentation from model inference while retaining a single production URL. The interface can use semantic HTML, responsive behavior, accessible interaction states, and a narrowly scoped animation bundle.
-- **Minimal editorial design system:** strict rules, square geometry, warm neutral surfaces, and one primary accent keep attention on evidence and avoid a generic card-dashboard presentation. The persisted source of truth is `design-system/terratrust/MASTER.md`.
-- **Purposeful motion only:** Framer Motion uses `LazyMotion` with `domAnimation`; transitions are limited to view changes, result/queue entry, and press feedback. Reduced-motion preferences are respected.
+- **Calm management-tool design system:** a compact page frame, warm neutral surfaces, thin rules, restrained serif headings, and one primary accent keep attention on the working review flow. The persisted source of truth is `design-system/terratrust/MASTER.md`.
+- **Static product states:** the current React interface does not use animated page transitions. Only loading feedback moves, and reduced-motion preferences are respected through CSS.
 - **Deterministic features plus gradient boosting:** trains on ordinary hardware, is reproducible inside a short hackathon, and keeps the repository deployable without a large deep-learning runtime.
 - **Separate validation and test roles:** calibration and threshold selection use validation data; final claims use held-out test data.
 - **Saved evidence artifacts:** the dashboard cannot drift away from the evaluated results.

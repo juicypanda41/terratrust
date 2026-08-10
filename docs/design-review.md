@@ -5,40 +5,34 @@ Rubric rows supported: Presentation Quality, Technical Execution, Creative AI Us
 
 ## Design intent
 
-TerraTrust uses a restrained scientific-editorial interface so judges can understand the decision policy and verify evidence quickly. The visual system is documented in `design-system/terratrust/MASTER.md`.
+TerraTrust uses a calm, compact management-tool interface so judges can understand the review policy and verify evidence quickly. The visual system is documented in `design-system/terratrust/MASTER.md`.
 
-- Quiet product grid with a direct working-scene introduction.
-- Warm paper background, near-black type and rules, one field-green action color, and amber review states.
-- Square geometry, no shadows, no gradients, no glass surfaces, no decorative AI motifs, and no generic card wall.
-- System sans-serif typography plus monospace evidence labels; no blocking font request.
+- Compact masthead, restrained serif hierarchy, and one framed analysis workspace.
+- Warm paper, near-black type, thin rules, one field-green action surface, and amber review states.
+- Square geometry, no shadows, gradients, glass, decorative AI motifs, or generic card wall.
+- Newsreader display headings, Roboto interface copy, and limited monospace metadata with system fallbacks.
 - Status always combines icon, text, and color.
-- Direct numerical labels and HTML table alternatives keep evidence legible without hover.
+- Direct numerical labels and an HTML table keep evidence readable without hover.
 
 ## Tool-assisted review
 
-UI/UX Pro Max was used to generate and refine the persistent design system, select accessible chart patterns, and run the required `animation accessibility z-index loading` validation search. Generic dashboard and stylized editorial treatments were rejected in favor of a quiet product interface.
+UI/UX Pro Max was used to refine the persistent design system, check accessible chart patterns, and run the required `animation accessibility z-index loading` validation search. Generic dashboards, exaggerated minimalism, and AI-native treatments were rejected.
 
-Framer Motion follows the requested performance rules:
+The final pass removed Framer Motion components from the rendered interface. Screen changes are direct React state updates; the loading spinner is the only continuous animation. A CSS reduced-motion fallback remains.
 
-- `LazyMotion` with `domAnimation` and the `m` component.
-- Stable variants defined outside render functions.
-- Transform and opacity animations only.
-- Motion limited to view changes, result/queue entry, and press feedback.
-- `MotionConfig reducedMotion="user"` plus a CSS reduced-motion fallback.
-
-The installed 21st CLI 1.15.1 ran `review src --strict --json` against the frontend:
+The installed 21st CLI 1.15.1 ran `review frontend/src --strict --json`:
 
 | Finding level | Count |
 |---|---:|
 | Errors | 0 |
 | Warnings | 0 |
-| Suggestions | 18 |
+| Suggestions | 15 |
 
-All suggestions were informational hardcoded-color checks. Most point to the centralized `:root` token declarations; the remainder are intentional state/fallback and alpha-overlay literals. No scattered component palette was introduced. 21st AI sketch generation was not used because the CLI was not authenticated; this boundary is disclosed in `docs/ai-use-log.md`.
+The suggestions are informational hardcoded-color checks. Most identify centralized `:root` token declarations; the rest are intentional state surfaces. No component-specific palette was introduced. 21st AI sketch generation was not used because the CLI was not authenticated; this boundary is disclosed in `docs/ai-use-log.md`.
 
-## Product-first homepage refinement
+## Final reference-based refinement
 
-The final homepage removes the benchmark ledger, dataset branding, image counts, threshold explanation, event track label, model-input dimensions, decorative contour art, numbered navigation, agency-style micro-labels, and oversized slogan treatment from the primary story. The introduction now pairs a concise product statement with a real reference scene from the working demo. A plain three-outcome workflow explains the human checkpoint without a decorative diagram. Technical performance remains under **Validation** rather than acting as the brand headline.
+The final interface follows the concrete rhythm of the local Iris Hackathon reference: a compact frame, small masthead, serif display type, thin rules, subdued surfaces, and one framed workspace. It removes the previous showcase hero, reference-image hero card, numbered concepts, page choreography, dashboard cards, and promotional microcopy. Technical performance remains under **Validation** rather than acting as the product headline.
 
 ## Functional and responsive QA
 
@@ -48,20 +42,20 @@ The final homepage removes the benchmark ledger, dataset branding, image counts,
 | Frontend interaction test | Vitest + Testing Library | 1/1 pass |
 | Python/model/API tests | Pytest | 11/11 pass |
 | Live health | `/api/health` | model ready; frontend ready |
-| Core demo | Ambiguous `Highway_2.jpg` → 46.0% confidence → review queue | Pass |
-| Desktop visual inspection | 1265px browser viewport | Pass |
-| Small phone | 375×812 override; rendered client width 360px | Pass |
-| Page/navigation overflow | scroll width equals client width | None |
-| Touch targets | visible buttons measured in screen flow | None below 44×44px |
-| Browser console | warnings and errors | None |
-| Empty/loading/error states | interface and API paths | Present |
+| Core model path | API/model tests plus preserved accepted/review routing | Pass |
+| Desktop visual inspection | Isolated 1280x900 render of overview and analysis | Pass |
+| Narrow-layout visual inspection | Isolated 500x812 render with mobile breakpoint active | Pass |
+| Exact 375px inspection | Live-preview controller unavailable during the final reference-based pass | Manual verification required |
+| Touch targets | CSS minimum plus interaction test inspection | 44px minimum defined |
+| Browser console | Not re-measured after the final reference-based pass | Manual verification required |
+| Empty/loading/error states | Interface and API paths | Present |
 
-The first mobile inspection exposed a horizontal navigation scrollbar. The navigation was changed to a two-by-two labeled index and retested with equal scroll/client widths.
+The final narrow render uses four plain navigation labels and hides the secondary masthead descriptor to preserve space. An exact 375px manual pass remains required because the isolated Windows browser enforces a wider minimum layout viewport.
 
 ## Remaining human checks
 
-- Run a real screen-reader pass and 200% browser zoom pass.
+- Run an exact 375px pass in the live browser, plus screen-reader and 200% zoom checks.
 - Test on at least one physical phone and a second desktop browser.
-- Build and run the included Docker image on a machine with Docker; Docker was unavailable in the local test environment.
+- Build and run the included Docker image on a machine with Docker; Docker was unavailable locally.
 - Conduct the planned usability sessions with real participants; do not invent outcomes.
-- Rehearse and record the final 2–3 minute demo with all team members represented.
+- Rehearse and record the final 2-3 minute demo with all team members represented.

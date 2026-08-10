@@ -10,6 +10,7 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance + 21st CLI | React/FastAPI interface redesign and review | Create a restrained, accessible, demo-ready interface | Team must assign | 0 errors / 0 warnings in 21st strict review; 12 automated tests after redesign | Entry 2 |
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance | Homepage simplification and contour-field art direction | Replace evaluation-first presentation with a stronger product-first brand experience | Team must assign | Benchmark strip and event/dataset/model jargon removed from primary flow; build and responsive QA rerun | Entry 3 |
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance | Product-interface de-stylization | Remove generated-looking visual conventions after direct human critique | Team must assign | Decorative hero, numbered navigation, agency labels, and oversized type removed; automated and visual QA rerun | Entry 4 |
+| 2026-08-09 | OpenAI Codex + UI/UX Pro Max + local Iris Hackathon reference | Calm management-tool redesign | Match a concrete human-selected visual reference and remove the remaining generated-showcase patterns | Team must assign | Framer components removed from rendered UI; strict review returned 0 errors and 0 warnings; automated suites passed | Entry 5 |
 
 ## Entry 1
 
@@ -75,6 +76,21 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **Validation performed:** Production build, frontend interaction test, Python/API/model test suite, strict 21st review, desktop and 375px visual inspection, overflow/touch-target checks, and browser-console review.
 - **Measured outcome:** Removed the abstract hero graphic, decorative motion, numbered navigation, oversized slogan, policy diagram, and uppercase output/boundary labels. The homepage now uses the real reference scene and plain workflow language. No model metric or user-research claim was changed.
 - **Limitations:** Whether an interface feels human-designed is qualitative. Final acceptance remains a human team decision and does not guarantee a judging result.
+
+## Entry 5
+
+- **Date/time:** 2026-08-09
+- **Tools and references:** OpenAI Codex; UI/UX Pro Max local design database; the user-provided local Iris Hackathon frontend. The named Kriya Yoga project was not available in the accessible workspace and is not claimed as an inspected source.
+- **Component/element changed:** Entire React presentation structure, navigation, overview, analysis workspace, results, queue, validation report, responsive CSS, design system, and related documentation.
+- **Representative detailed prompt:**
+
+  > Make TerraTrust follow the calm, natural, minimal style of the Kriya Yoga management app and the Iris Hackathon project. Strip out anything that looks vibe-coded or AI-generated while preserving the working model, review flow, evidence, accessibility, and rubric value.
+
+- **Human-directed decision:** The user named the preferred references and explicitly rejected the prior product-first treatment. The Iris frontend was used as the concrete source of spacing, typography, page width, thin-rule structure, and workspace composition.
+- **Output used:** `frontend/src/App.jsx`, `frontend/src/styles.css`, `frontend/src/App.test.jsx`, `design-system/terratrust/MASTER.md`, and related architecture/design documentation.
+- **Validation performed:** React interaction test, production build, 11 Python/API/model tests, strict 21st review, required UI/UX Pro Max validation search, source inspection for semantic controls and reduced-motion handling, and isolated desktop/narrow-breakpoint render inspection. Exact 375px verification remains a manual check.
+- **Measured outcome:** Removed all Framer Motion components from the rendered interface, reduced the production JavaScript bundle, replaced the three-column analysis layout with one two-column workspace, and reduced strict-review informational findings to 15 with 0 errors and 0 warnings. Model outputs and evidence artifacts were unchanged.
+- **Limitations:** Visual similarity and naturalness remain qualitative. Final approval belongs to the team, and a real assistive-technology pass is still required.
 
 ## Where AI was not used
 

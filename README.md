@@ -91,7 +91,7 @@ Calibration and threshold selection use validation data only. Final metrics use 
 
 ```text
 api.py                         FastAPI model bridge and production web server
-frontend/                      React/Vite editorial interface and UI test
+frontend/                      React/Vite product interface and UI test
 src/terratrust/                Features, calibration, inference, configuration
 scripts/download_data.py       Official download plus checksum validation
 scripts/train.py               Reproducible train/validation/test evaluation
@@ -103,7 +103,7 @@ design-system/terratrust/      Persisted UI source of truth
 MODEL_CARD.md                  Intended use and limitations
 ```
 
-The interface uses a quiet, utilitarian design system: warm paper, black rules, one field-green action color, and amber review states. Framer Motion is limited to functional state transitions and respects reduced-motion preferences. The production bundle is served by FastAPI, so judges need one URL.
+The interface uses a quiet management-tool design system: warm paper, thin rules, restrained serif headings, one field-green action color, and amber review states. The current interface avoids decorative page animation; only loading feedback moves. The production bundle is served by FastAPI, so judges need one URL.
 
 ## Model approach
 

@@ -1,59 +1,61 @@
 # TerraTrust Design System
 
-Source of truth for the hackathon interface. Refined on August 9, 2026 after direct product review.
+Source of truth for the interface. Refined on August 9, 2026 using the local Iris Hackathon interface as the concrete reference and the requested calm management-tool character as the secondary direction.
 
 ## Direction
 
-- Product: responsible scientific decision-support tool.
-- Style: quiet, utilitarian, and product-led.
-- Tone: direct, measured, and human.
-- Avoid: gradients, glass, abstract hero art, decorative motion, numbered navigation, agency-style labels, oversized slogans, soft card grids, fake maps, AI motifs, and color-only states.
-- Geometry: 1px rules, 1px radius, and no shadows.
-- Homepage principle: show the actual screening workflow. Keep dataset names, sample counts, model terminology, and event language in documentation or validation—not in the product introduction.
+- Product: a land-cover review instrument, not a marketing site.
+- Tone: calm, practical, quiet, and accountable.
+- Reference qualities: compact 1240px frame, serif display type, warm paper, thin rules, plain controls, and one focused workspace.
+- Avoid: abstract hero art, gradients, glass, shadows, soft card walls, bento grids, numbered steps, agency labels, oversized slogans, decorative animation, fake maps, and AI-product motifs.
+- Use real product states and measured evidence as the visual content.
 
 ## Tokens
 
 | Role | Value | Use |
 |---|---|---|
-| Paper | `#F4F1E8` | Page background |
-| Paper deep | `#E9E5DA` | Selected and hover surfaces |
-| Ink | `#171914` | Primary type, rules, primary action |
-| Muted | `#5C6157` | Secondary copy |
-| Field green | `#155F3E` | Primary accent and accepted state |
-| Field green dark | `#0F4B31` | High-contrast green text/action |
-| Review amber | `#9D5212` | Review state, paired with icon and text |
-| Error | `#A12B24` | Recoverable errors, paired with explanation |
-| White | `#FFFEFA` | Text on dark actions and image stages |
+| Paper | `#F4F3EE` | Page background |
+| Surface | `#FBFAF6` | Analysis workspace |
+| Ink | `#20231E` | Primary text and strong rules |
+| Muted | `#666A62` | Supporting copy |
+| Line | `#D1D2CB` | Internal separators |
+| Line dark | `#9A9E95` | Control borders |
+| Field | `#B8C99B` | Primary action surface |
+| Field dark | `#526342` | Focus and accepted state |
+| Review | `#8A4D1F` | Human-review state |
+| Error | `#9F2F25` | Recoverable errors |
 
-Typography uses the system Helvetica/Arial stack. Body text is at least 16px on mobile with 1.5 line height. Numerical evidence uses tabular figures.
+Display headings use Newsreader with Georgia fallback. Interface copy uses Roboto with Arial fallback. Roboto Mono is reserved for filenames and small factual metadata.
 
-Spacing follows an 8px base: 8 / 16 / 24 / 32 / 48 / 64 / 96. Desktop content is capped at 1440px; mobile gutters are 16–20px.
+Spacing follows a 4/8px rhythm. The page width is `min(100% - 40px, 1240px)` on desktop and `100% - 32px` on phones.
 
-## Components
+## Structure
 
-- Header: wordmark and four plainly labeled destinations with a restrained active underline.
-- Hero: one concise product statement, one action, and one real reference scene from the working demo.
-- Homepage workflow: three plain-language outcomes separated by rules; no diagram or decorative illustration.
-- Buttons: rectangular, 48px minimum height, with one primary action per view.
-- Status: icon + text + accessible color; green means eligible and amber means review.
-- Charts: direct values and text alternatives; no gradients or hover-only meaning.
-- Images: fixed aspect ratio and dimensions to prevent layout shift.
-- Empty, error, and loading states: explicit next action and `aria-live` where appropriate.
+- Masthead: small TT mark, wordmark, and one quiet product descriptor.
+- Navigation: four plain text destinations under the masthead.
+- Overview: one concise serif statement, one text action, and three ruled workflow lines.
+- Analyze: one bordered two-column workspace. Source and controls stay left; the result stays right.
+- Review: a ruled list, never a stack of floating cards.
+- Validation: one metric strip followed by report-like sections and a native HTML table.
+- Footer: short product boundary statement.
 
-## Motion
+## Interaction
 
-- Framer Motion `LazyMotion` with `domAnimation`; never import `motion`.
-- Motion is functional only: view changes, result/queue entry and exit, and press feedback.
-- Transform and opacity only, 140–240ms, with stable variants outside components.
-- Honor system reduced-motion preferences through `MotionConfig` and CSS.
+- Native semantic controls only.
+- Minimum target height: 44px.
+- One primary action in each task area.
+- Loading is the only continuous animation.
+- No Framer Motion components or decorative entrance transitions in the current interface.
+- Reduced-motion CSS remains as a safety fallback.
+- Status always uses text and an icon in addition to color.
 
 ## Responsive behavior
 
-- 1440px: two-column product introduction and three-column analysis workspace.
-- 1024px: analysis result moves below the input/image pair.
-- 768px: navigation becomes a two-by-two labeled grid and main layouts become one column.
-- 375px: charts and tables remain readable without page-level horizontal scrolling.
+- Above 900px: two-column analysis workspace and validation layout.
+- At 900px: workspaces become one column.
+- At 640px: compact four-column navigation, stacked actions, two-by-two metrics, and simplified queue rows.
+- At 375px: no page-level horizontal scrolling and all controls remain at least 44px high.
 
-## Evidence and rubric intent
+## Rubric intent
 
-The interface supports the Presentation Quality and Technical Execution rows in `docs/judging-scorecard.md`: a clear problem/solution story, reliable core demo, readable held-out metrics, error handling, scope boundaries, and a visible human-review handoff. Styling never implies measured impact that the project has not established.
+The restrained design supports Presentation Quality and Technical Execution by keeping the working analysis, review handoff, measured results, error states, and limitations easy to verify. Styling never implies environmental outcomes or deployment readiness that have not been measured.

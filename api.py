@@ -70,7 +70,7 @@ def demo_manifest() -> list[dict[str, str]]:
     stories = {
         "Forest_1.jpg": "Clear forest",
         "Highway_2.jpg": "Ambiguous scene",
-        "Highway_1.jpg": "Known failure case",
+        "Highway_1.jpg": "Difficult road scene",
     }
     priority = {"Forest_1.jpg": 0, "Highway_2.jpg": 1, "Highway_1.jpg": 2}
     ordered = sorted(items, key=lambda item: (priority.get(item["file"], 99), item["file"]))

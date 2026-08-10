@@ -17,9 +17,9 @@ describe("TerraTrust interface", () => {
   it("loads evidence and navigates by accessible buttons", async () => {
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true, json: async () => payload }));
     render(<App />);
-    expect(await screen.findByRole("heading", { name: /land-cover screening with a human checkpoint/i })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: /review uncertain land-cover results/i })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /^analyze$/i }));
-    await waitFor(() => expect(screen.getByRole("heading", { name: /analyze a scene/i })).toBeInTheDocument());
-    expect(screen.getByRole("button", { name: /run screening/i })).toBeEnabled();
+    await waitFor(() => expect(screen.getByRole("heading", { name: /land-cover review/i })).toBeInTheDocument());
+    expect(screen.getByRole("button", { name: /run analysis/i })).toBeEnabled();
   });
 });
