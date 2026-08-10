@@ -30,7 +30,7 @@ Display headings use Instrument Serif with Georgia fallback. Interface copy uses
 ## Structure
 
 - Header: one translucent, blurred instrument bar with four plain navigation destinations.
-- Overview: viewport-scale editorial statement over a CSS-only terrain atmosphere; no stock footage or fabricated geographic data.
+- Overview: viewport-scale product statement over a custom-generated oblique forest photograph. The image is decorative and is never presented as analyzed evidence or a real monitored location.
 - Analyze: stable two-column source/result workspace; atmosphere never competes with task controls.
 - Human verification: ruled operational queue.
 - Validation: native tables, chart, metric strip, SDG contribution chain, limits, and deployment plan.

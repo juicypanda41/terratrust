@@ -137,6 +137,17 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **Output used:** `vercel.json`, deployment documentation, Git remote/branch publication, and production deployment verification.
 - **Validation boundary:** Authentication and platform ownership remain human-controlled. Publication does not prove scale, reliability, or environmental impact.
 
+### Forest hero asset and product headline
+
+- **Date/time:** 2026-08-09
+- **Tools:** OpenAI image generation, OpenAI Codex, UI/UX Pro Max guidance, and Pillow format conversion.
+- **Purpose:** Replace an abstract background and vague headline with a direct product statement and a dimensional environmental image.
+- **Representative prompt:** “Create a realistic, ultra-wide oblique aerial view across layered forest ridges for a dark TerraTrust hero. Keep the left 45% dark and quiet for white copy, place canopy detail on the right, use subdued moss/pine tones and dawn haze, and exclude text, logos, map markers, buildings, roads, fantasy glow, or any implication that the image is analyzed evidence.”
+- **Output used:** `frontend/public/terratrust-forest-hero.webp`, dark contrast overlays, and the headline “Land-cover analysis that makes uncertainty visible.”
+- **Rationale:** The headline now states the actual product category and differentiator. The oblique terrain provides requested depth without autoplay video or fake GIS overlays.
+- **Validation and outcome:** The 2.1 MB generated PNG was converted to a 136 KB WebP; frontend tests, production build, strict UI review, responsive styling, and reduced-motion behavior were rechecked.
+- **Boundaries:** The image is decorative, not a model input, monitored location, satellite evidence, or proof of environmental impact.
+
 ## Where AI was not used
 
 Document human-owned work and the reason it stayed human-led, such as firsthand interviews, final ethical decisions, consent, source verification, judging claims, original team opinions, or final approval.

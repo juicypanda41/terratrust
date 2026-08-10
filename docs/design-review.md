@@ -72,3 +72,7 @@ On August 9, 2026, the user supplied a cinematic black/glass/video landing-page 
 - Isolated the experiment on `codex/immersive-terra-design`. The known-good light design remains at commit `7d2bb82` on `main`.
 
 This change maps to Presentation Quality and Technical Execution in `docs/judging-scorecard.md`. Final visual preference remains a human decision.
+
+### Forest hero refinement
+
+The initial abstract contour atmosphere was replaced with a project-specific, generated oblique forest image after direct user feedback. The composition concentrates dimensional terrain on the right and preserves dark negative space beneath the headline. A layered CSS scrim maintains text contrast without modifying any product interaction. The source was converted to a 136 KB WebP for the shipped interface; it is decorative, not evidence, and does not represent a named real location.

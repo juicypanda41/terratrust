@@ -47,13 +47,9 @@ img { display: block; max-width: 100%; }
 .queue-count { display: inline-grid; place-items: center; min-width: 18px; height: 18px; margin-left: 7px; padding: 0 4px; background: var(--field); color: #11160e; border-radius: 50%; font-size: 10px; }
 
 .overview-screen { position: relative; isolation: isolate; min-height: calc(100vh - 154px); }
-.terrain-field { position: absolute; z-index: -1; inset: 0 calc(50% - 50vw); overflow: hidden; opacity: .92; pointer-events: none; }
-.terrain-field::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 72% 35%, rgba(114,151,80,.22), transparent 34%), radial-gradient(ellipse at 12% 78%, rgba(62,91,52,.18), transparent 30%), linear-gradient(180deg, transparent 0%, #090b09 88%); }
-.terrain-field::after { content: ""; position: absolute; inset: 14% -10% 8% 38%; border: 1px solid rgba(199,223,169,.14); border-radius: 50% 44% 48% 52%; transform: rotate(-12deg); box-shadow: 0 0 90px rgba(130,169,91,.08), inset 0 0 80px rgba(130,169,91,.04); }
-.terrain-field span { position: absolute; display: block; border: 1px solid rgba(199,223,169,.09); border-radius: 50%; transform: rotate(-12deg); }
-.terrain-field span:nth-child(1) { width: 58vw; height: 42vw; min-width: 600px; min-height: 430px; right: -5vw; top: 8%; }
-.terrain-field span:nth-child(2) { width: 48vw; height: 32vw; min-width: 500px; min-height: 330px; right: 2vw; top: 16%; }
-.terrain-field span:nth-child(3) { width: 38vw; height: 23vw; min-width: 390px; min-height: 240px; right: 8vw; top: 24%; }
+.terrain-field { position: absolute; z-index: -1; inset: 0 calc(50% - 50vw); overflow: hidden; pointer-events: none; background: #090b09 url("/terratrust-forest-hero.webp") center right / cover no-repeat; }
+.terrain-field::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,11,9,.96) 0%, rgba(9,11,9,.79) 38%, rgba(9,11,9,.34) 68%, rgba(9,11,9,.2) 100%), linear-gradient(180deg, rgba(9,11,9,.2) 0%, rgba(9,11,9,.12) 54%, #090b09 100%); }
+.terrain-field::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 78% 42%, transparent 0%, rgba(9,11,9,.08) 45%, rgba(9,11,9,.38) 100%); }
 .intro { min-height: 62vh; display: flex; flex-direction: column; justify-content: center; padding: 80px 0 54px; border-bottom: 1px solid var(--line-dark); }
 .section-label { margin: 0 0 14px; color: var(--muted); font: 10px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .09em; }
 .intro h1 { max-width: 1050px; margin: 0; font-family: var(--display); font-size: clamp(58px, 8vw, 108px); font-weight: 400; line-height: .9; letter-spacing: -.045em; text-wrap: balance; }

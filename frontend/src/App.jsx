@@ -218,10 +218,10 @@ function Header({ activeView, queueCount, onNavigate }) {
 function Overview({ onStart }) {
   return (
     <div className="overview-screen">
-      <div className="terrain-field" aria-hidden="true"><span /><span /><span /></div>
+      <div className="terrain-field" aria-hidden="true" />
       <section className="intro" aria-labelledby="intro-title">
         <p className="section-label">Responsible screening</p>
-        <h1 id="intro-title">Know when the model <em>needs a person.</em></h1>
+        <h1 id="intro-title">Land-cover analysis that makes <em>uncertainty visible.</em></h1>
         <div className="intro-bottom">
           <p>TerraTrust classifies one satellite scene at a time and holds uncertain or unfamiliar images for a person to verify.</p>
           <button className="text-action" onClick={onStart}>Start an analysis <ArrowRight size={17} aria-hidden="true" /></button>
