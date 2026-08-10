@@ -215,7 +215,7 @@ function Overview({ onStart }) {
       <div className="terrain-field" aria-hidden="true" />
       <section className="intro" aria-labelledby="intro-title">
         <p className="section-label">Environmental decision support</p>
-        <h1 id="intro-title">Keep uncertain predictions out of <em>environmental decisions.</em></h1>
+        <h1 id="intro-title">See and understand the land clearly. <em>Act with stronger evidence.</em></h1>
         <div className="intro-bottom">
           <p>Satellite imagery can help monitor forests, water, farms, and growing cities, but only when the evidence is trustworthy. TerraTrust screens land-cover scenes and directs uncertain results to a person before they enter a monitoring workflow.</p>
           <button className="text-action" onClick={onStart}>Start an analysis <ArrowRight size={17} aria-hidden="true" /></button>

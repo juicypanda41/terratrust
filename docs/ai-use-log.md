@@ -170,6 +170,7 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **Validation:** Deck claims were checked against `artifacts/metrics.json`, `MODEL_CARD.md`, `docs/metrics-evidence.md`, `docs/scalability-plan.md`, `docs/judging-scorecard.md`, and the live/repository links. Final visual review, team-name insertion, rehearsal timing, and submission approval remain human-owned.
 - **Measurable outcome:** The generation brief maps ten slides to all six Technical Track criteria and targets a 2:40 delivery. It uses measured figures of 91.4% accepted-case accuracy, 78.9% coverage, 21.1% verification rate, 0.87% post-calibration ECE, and 22.3 ms local CPU p95 latency.
 - **Boundaries:** AI did not conduct user interviews, verify participant eligibility, select a pilot partner, measure conservation outcomes, or submit the project. Canva generation does not guarantee a rubric score.
+- **Final deck correction:** Canva's outline generator repeatedly collapsed the requested seven-slide narrative into two pages. Codex therefore authored an explicitly paginated HTML presentation, embedded the approved project imagery, imported it into Canva, and verified through Canva that the final design contains seven pages with clean text encoding. Final design ID: `DAHR34bH9E0`.
 
 Document human-owned work and the reason it stayed human-led, such as firsthand interviews, final ethical decisions, consent, source verification, judging claims, original team opinions, or final approval.
 
@@ -228,3 +229,12 @@ Document human-owned work and the reason it stayed human-led, such as firsthand 
 - **Rationale:** Matches the requested writing style without changing meaning, layout, or functionality.
 - **Validation:** Repository-wide frontend search, interaction test, and production build.
 - **Boundary:** No product claims, metrics, behavior, or visual structure changed.
+
+## 2026-08-10 - Hero headline refinement
+
+- **Tool:** Codex
+- **Purpose:** Broaden the opening message beyond human verification and emphasize TerraTrust's land-monitoring purpose.
+- **Output used:** Changed the hero headline to "See and understand the land clearly. Act with stronger evidence."
+- **Rationale:** Makes the first impression more impact-focused while remaining consistent with the project's measured land-cover screening capability.
+- **Validation:** Frontend interaction test and production build.
+- **Boundary:** No model behavior, result, metric, environmental outcome, or application workflow changed.
