@@ -11,6 +11,7 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance | Homepage simplification and contour-field art direction | Replace evaluation-first presentation with a stronger product-first brand experience | Team must assign | Benchmark strip and event/dataset/model jargon removed from primary flow; build and responsive QA rerun | Entry 3 |
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + Framer Motion guidance | Product-interface de-stylization | Remove generated-looking visual conventions after direct human critique | Team must assign | Decorative hero, numbered navigation, agency labels, and oversized type removed; automated and visual QA rerun | Entry 4 |
 | 2026-08-09 | OpenAI Codex + UI/UX Pro Max + local Iris Hackathon reference | Calm management-tool redesign | Match a concrete human-selected visual reference and remove the remaining generated-showcase patterns | Team must assign | Framer components removed from rendered UI; strict review returned 0 errors and 0 warnings; automated suites passed | Entry 5 |
+| 2026-08-09 | OpenAI Codex | Exceptional-rubric evidence consolidation | Make benchmarks, targets, SDG logic, scale assumptions, and remaining human gates obvious and auditable | Team must assign | Five measured/target metrics surfaced in-product; three evidence records added; tests and build rerun | Entry 6 |
 
 ## Entry 1
 
@@ -102,6 +103,18 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **Validation performed:** React interaction test, production build, repository diff check, and user-facing copy scan.
 - **Measured outcome:** The primary workflow is now labeled “Human verification,” while internal API field names and standard evaluation metrics such as `review_rate` remain unchanged for compatibility and reproducibility.
 - **Limitations:** This is a terminology and presentation change; model behavior and measured results did not change.
+
+## Entry 6
+
+- **Date/time:** 2026-08-09
+- **Tool:** OpenAI Codex
+- **Component/element changed:** Validation interface, metrics register, quantified scalability/deployment plan, demo rehearsal record, architecture, README, and judging scorecard.
+- **Representative detailed prompt:** “Do every exceptional-rubric item that is possible for the code, if it has not been done, and make the evidence obvious.”
+- **Rationale:** The repository contained strong machine evidence, but judges would have needed to connect several files themselves. Consolidation reduces that interpretation burden without inventing missing human evidence.
+- **Output used:** An in-product target/result/method table, an explicit SDG 15.1/15.2 contribution chain, a three-phase deployment path, a measured-latency-derived throughput projection with assumptions, and blank records for real rehearsal/user-owned completion.
+- **Validation performed:** React interaction test, production build, Python test suite, source/diff inspection, and checks that projections and unmeasured outcomes are labeled.
+- **Measurable outcome:** Five performance targets or baselines are now visible together in the product; the scale plan documents six assumptions, three infrastructure phases, deployment gates, failure handling, and observability.
+- **Boundaries:** AI did not conduct user interviews, rehearse with the team, publish a video, verify participant eligibility, choose a partner, or claim conservation outcomes. Those remain explicitly incomplete.
 
 ## Where AI was not used
 

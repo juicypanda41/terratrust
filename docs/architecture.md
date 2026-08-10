@@ -11,7 +11,7 @@ flowchart LR
     J --> G
     G --> K["React / Vite interface"]
     K --> H["Auto-accept"]
-    K --> I["Human review queue"]
+    K --> I["Human verification queue"]
     D --> J["Held-out evidence artifacts"]
     J --> K
 ```
@@ -28,4 +28,4 @@ flowchart LR
 
 ## Scale path
 
-The prototype handles single images and small batches. A pilot would package inference behind a containerized API, store review events in a database, ingest cloud-masked Sentinel-2 tiles, and measure region-specific performance. Throughput projections must be calculated from measured latency and deployment hardware before inclusion in the pitch.
+The prototype handles single images and small batches. A pilot would package inference behind a containerized API, store verification events in a database, ingest cloud-masked Sentinel-2 tiles, and measure region-specific performance. The measured warm local CPU p95 is 22.3 ms per image; this implies a theoretical serial ceiling near 44 images/second before storage, network, and concurrency overhead. The project uses 20 images/second only as a conservative planning assumption—not a deployed capacity claim. Infrastructure, rollout phases, observability, assumptions, and deployment gates are documented in `docs/scalability-plan.md`.

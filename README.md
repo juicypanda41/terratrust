@@ -27,10 +27,10 @@ On a deterministic held-out EuroSAT RGB test set of 4,050 images:
 
 - **89.4%** overall accuracy and **88.9%** macro F1.
 - **91.4%** accuracy on the **78.9%** of tiles accepted by the complete confidence-plus-quality policy.
-- **21.1%** routed to human review.
+- **21.1%** routed to human verification.
 - Expected calibration error improved from **2.55% to 0.87%**.
 - Median warm local inference was **16.2 ms** across 100 images; hardware affects this result.
-- A validation-trained quality gate routed **98.5%-100%** of four controlled test perturbations to review. This stress test does not establish complete real-world robustness.
+- A validation-trained quality gate routed **98.5%-100%** of four controlled test perturbations to verification. This stress test does not establish complete real-world robustness.
 
 ## Quick start in VS Code
 
@@ -103,7 +103,7 @@ design-system/terratrust/      Persisted UI source of truth
 MODEL_CARD.md                  Intended use and limitations
 ```
 
-The interface uses a quiet management-tool design system: warm paper, thin rules, restrained serif headings, one field-green action color, and amber review states. The current interface avoids decorative page animation; only loading feedback moves. The production bundle is served by FastAPI, so judges need one URL.
+The interface uses a quiet management-tool design system: warm paper, thin rules, restrained serif headings, one field-green action color, and amber verification states. The current interface avoids decorative page animation; only loading feedback moves. The production bundle is served by FastAPI, so judges need one URL.
 
 ## Model approach
 
@@ -141,7 +141,10 @@ TerraTrust does not provide segmentation, boundaries, acreage, temporal change d
 - [Judging scorecard](docs/judging-scorecard.md)
 - [AI-use disclosure](docs/ai-use-log.md)
 - [Validation plan](docs/validation-plan.md)
+- [Metrics and evidence register](docs/metrics-evidence.md)
+- [Scalability and deployment plan](docs/scalability-plan.md)
 - [2:40 demo script](docs/demo-script.md)
+- [Demo rehearsal record](docs/demo-rehearsal-record.md)
 
 ## License
 

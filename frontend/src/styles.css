@@ -106,6 +106,12 @@ img { display: block; max-width: 100%; }
 .confidence strong { font-family: var(--display); font-size: 34px; font-weight: 400; }
 .confidence span { color: var(--muted); font-size: 12px; }
 .review-reason { margin: 0; padding: 15px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.provenance-note { margin: 14px 0 0; color: var(--muted); font-size: .83rem; line-height: 1.55; }
+.impact-chain, .scale-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.impact-chain > div, .scale-grid > div { min-width: 0; padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.impact-chain span, .scale-grid span { display: block; margin-bottom: 18px; color: var(--muted); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+.impact-chain strong, .scale-grid strong { display: block; margin-bottom: 7px; font-family: "Newsreader", Georgia, serif; font-size: 1.15rem; font-weight: 500; }
+.impact-chain p, .scale-grid p { margin: 0; color: var(--muted); font-size: .86rem; line-height: 1.5; }
 .result-details { margin: 0; }
 .result-details > div { display: flex; justify-content: space-between; gap: 20px; padding: 10px 0; border-bottom: 1px solid var(--line); }
 .result-details dt { color: var(--muted); }
@@ -197,6 +203,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
   .masthead { min-height: 62px; }
   .masthead-note { display: none; }
   .primary-nav { gap: 0; display: grid; grid-template-columns: repeat(2, 1fr); }
+  .impact-chain, .scale-grid { grid-template-columns: 1fr; }
   .nav-item { width: 100%; }
   .nav-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .intro { padding: 38px 0 36px; }

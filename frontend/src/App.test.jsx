@@ -7,7 +7,7 @@ const payload = {
     selective_accuracy: 0.914, coverage: 0.789, review_rate: 0.211, ece_after: 0.0087,
     ece_before: 0.0255, threshold: 0.504, target_selective_accuracy: 0.9, test_count: 4050,
     sample_count: 27000, accuracy: 0.894, macro_f1: 0.889, per_class: { Forest: {} },
-    inference_latency_ms: { median: 16.2 }, limitations: ["Scene classification only."],
+    inference_latency_ms: { median: 16.2, p95: 22.3, sample_count: 100 }, limitations: ["Scene classification only."],
   },
   demos: [{ file: "Forest_1.jpg", display_label: "Forest", story: "Clear forest", image_url: "/demo-assets/Forest_1.jpg" }],
   robustness: [], risk_coverage: [{ threshold: "0.3", selective_accuracy: "0.89" }, { threshold: "0.99", selective_accuracy: "0.998" }],
@@ -21,5 +21,9 @@ describe("TerraTrust interface", () => {
     fireEvent.click(screen.getByRole("button", { name: /^analyze$/i }));
     await waitFor(() => expect(screen.getByRole("heading", { name: /land-cover analysis/i })).toBeInTheDocument());
     expect(screen.getByRole("button", { name: /run analysis/i })).toBeEnabled();
+    fireEvent.click(screen.getByRole("button", { name: "Validation" }));
+    expect(screen.getByRole("heading", { name: /targets, evidence, and method/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /sdg contribution/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /deployment path/i })).toBeInTheDocument();
   });
 });

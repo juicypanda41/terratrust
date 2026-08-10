@@ -333,6 +333,13 @@ function ReviewQueue({ items, onAnalyze, onRemove }) {
 
 function Validation({ data }) {
   const { metrics, robustness, risk_coverage: riskCoverage } = data;
+  const evidenceRows = [
+    { metric: "Always-predict accuracy", target: "Baseline", result: pct(metrics.accuracy), method: `Held-out test, n=${metrics.test_count.toLocaleString()}` },
+    { metric: "Accepted-case accuracy", target: "≥ 90.0%", result: pct(metrics.selective_accuracy), method: "Threshold selected on validation only" },
+    { metric: "Coverage", target: "Planning floor ≥ 75.0%*", result: pct(metrics.coverage), method: "Complete confidence + quality policy" },
+    { metric: "Calibration error", target: "< 1.0%", result: pct(metrics.ece_after, 2), method: "Expected calibration error; lower is better" },
+    { metric: "Warm CPU latency", target: "Planning guardrail < 50 ms*", result: `${metrics.inference_latency_ms.p95.toFixed(1)} ms`, method: `Local benchmark, n=${metrics.inference_latency_ms.sample_count}` },
+  ];
   return (
     <section aria-labelledby="validation-title">
       <PageIntro label="Validation" title="Performance and limits" description="Measured results from the held-out evaluation, alongside the boundaries of the current prototype." titleId="validation-title" />
@@ -343,6 +350,14 @@ function Validation({ data }) {
         <Metric label="Coverage" value={pct(metrics.coverage)} />
       </div>
       <div className="validation-layout">
+        <article className="validation-section full-width evidence-section">
+          <SectionHeading title="Targets, evidence, and method" detail="Measured — not projected impact" />
+          <div className="table-wrap"><table>
+            <thead><tr><th>Metric</th><th>Target</th><th>Result</th><th>Evidence method</th></tr></thead>
+            <tbody>{evidenceRows.map((row) => <tr key={row.metric}><th scope="row">{row.metric}</th><td>{row.target}</td><td><strong>{row.result}</strong></td><td>{row.method}</td></tr>)}</tbody>
+          </table></div>
+          <p className="provenance-note">Source: deterministic 70/15/15 split, seed 42, EuroSAT RGB v2. The 90% selective-accuracy target was used during validation; final results use the untouched test split. *Coverage and latency are post-benchmark planning guardrails, not preregistered targets.</p>
+        </article>
         <article className="validation-section curve-section">
           <SectionHeading title="Accuracy and coverage" detail={`Threshold ${pct(metrics.threshold, 0)}`} />
           <RiskCurve rows={riskCoverage} threshold={metrics.threshold} />
@@ -370,6 +385,24 @@ function Validation({ data }) {
           <div><SectionHeading title="Current boundaries" detail="Use with expert judgment" /><h2>What TerraTrust does not claim</h2></div>
           <ul>{PUBLIC_LIMITATIONS.map((limit) => <li key={limit}>{limit}</li>)}</ul>
           <div className="sdg-note"><FlaskConical size={18} aria-hidden="true" /><p><strong>SDG 15.1 and 15.2:</strong> TerraTrust supports a screening workflow. It does not claim measured conservation or deforestation outcomes.</p></div>
+        </article>
+        <article className="validation-section full-width impact-section">
+          <SectionHeading title="SDG contribution" detail="Targets 15.1 and 15.2" />
+          <div className="impact-chain" aria-label="TerraTrust theory of change">
+            <div><span>01</span><strong>Screen imagery</strong><p>Classify land-cover scenes with calibrated confidence.</p></div>
+            <div><span>02</span><strong>Direct attention</strong><p>Send uncertain scenes to human verification.</p></div>
+            <div><span>03</span><strong>Support monitoring</strong><p>Prepare more reliable inputs for ecosystem and forest workflows.</p></div>
+          </div>
+          <p className="provenance-note">Measured today: model reliability and verification workload. Not yet measured: changes in conservation, forest area, or SDG indicators.</p>
+        </article>
+        <article className="validation-section full-width scale-section">
+          <SectionHeading title="Deployment path" detail="Measured base, explicit projections" />
+          <div className="scale-grid">
+            <div><span>Prototype</span><strong>Single service</strong><p>FastAPI, React, saved model, one container. Warm CPU p95: {metrics.inference_latency_ms.p95.toFixed(1)} ms.</p></div>
+            <div><span>Pilot</span><strong>Queued batch processing</strong><p>Object storage, job queue, audit database, authentication, and region-specific validation.</p></div>
+            <div><span>Replication</span><strong>Horizontal workers</strong><p>Autoscaled stateless inference, model registry, drift monitoring, and GIS export.</p></div>
+          </div>
+          <p className="provenance-note">Planning estimate: one continuously busy worker could process about {Math.floor(1000 / metrics.inference_latency_ms.p95).toLocaleString()} images/second at measured p95 latency. Real capacity must be load-tested on deployment hardware.</p>
         </article>
       </div>
     </section>
