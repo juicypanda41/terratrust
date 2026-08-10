@@ -29,24 +29,20 @@ body { min-width: 320px; margin: 0; overflow-x: hidden; background: var(--paper)
 button, input { font: inherit; }
 button { min-height: 44px; color: inherit; cursor: pointer; touch-action: manipulation; transition: color 180ms ease-out, background-color 180ms ease-out, border-color 180ms ease-out, opacity 180ms ease-out; }
 img { display: block; max-width: 100%; }
-.site-shell { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; padding-top: 22px; }
+.site-shell { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
 .skip-link { position: fixed; z-index: 50; top: 8px; left: 8px; padding: 10px 14px; background: var(--ink); color: var(--paper); transform: translateY(-150%); }
 .skip-link:focus { transform: translateY(0); }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-.liquid-glass { background: rgba(255,255,255,.035); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.14); box-shadow: inset 0 1px rgba(255,255,255,.12); }
-.site-header { position: relative; z-index: 20; padding: 0 22px; border-radius: 18px; }
-.masthead { min-height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.wordmark { display: flex; align-items: center; gap: 10px; padding: 0; border: 0; background: transparent; font-weight: 500; letter-spacing: -.02em; }
-.wordmark-mark { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--line-dark); border-radius: 50%; font: 10px/1 var(--mono); letter-spacing: -.08em; }
-.masthead-note { color: var(--muted); font: 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .1em; }
-.primary-nav { min-height: 48px; display: flex; align-items: end; gap: 28px; border-top: 1px solid var(--line); }
-.nav-item { position: relative; min-height: 48px; padding: 0; border: 0; background: transparent; color: var(--muted); font-size: 13px; }
+.site-header { position: relative; z-index: 20; min-height: 76px; display: flex; align-items: stretch; justify-content: space-between; gap: 40px; border-bottom: 1px solid var(--line-dark); }
+.wordmark { min-height: 76px; padding: 0; border: 0; background: transparent; font-family: var(--display); font-size: 24px; letter-spacing: -.025em; }
+.primary-nav { display: flex; align-items: stretch; gap: 30px; }
+.nav-item { position: relative; min-height: 76px; padding: 0; border: 0; background: transparent; color: var(--muted); font-size: 13px; }
 .nav-item.active { color: var(--ink); font-weight: 500; }
 .nav-item.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--ink); }
 .queue-count { display: inline-grid; place-items: center; min-width: 18px; height: 18px; margin-left: 7px; padding: 0 4px; background: var(--field); color: #11160e; border-radius: 50%; font-size: 10px; }
 
-.overview-screen { position: relative; isolation: isolate; min-height: calc(100vh - 154px); }
+.overview-screen { position: relative; isolation: isolate; min-height: calc(100vh - 76px); }
 .terrain-field { position: absolute; z-index: -1; inset: 0 calc(50% - 50vw); overflow: hidden; pointer-events: none; background: #090b09 url("/terratrust-forest-hero.webp") center right / cover no-repeat; }
 .terrain-field::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,11,9,.96) 0%, rgba(9,11,9,.79) 38%, rgba(9,11,9,.34) 68%, rgba(9,11,9,.2) 100%), linear-gradient(180deg, rgba(9,11,9,.2) 0%, rgba(9,11,9,.12) 54%, #090b09 100%); }
 .terrain-field::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 78% 42%, transparent 0%, rgba(9,11,9,.08) 45%, rgba(9,11,9,.38) 100%); }
@@ -207,11 +203,11 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 
 @media (max-width: 640px) {
   .site-shell { width: min(calc(100% - 32px), var(--max)); }
-  .masthead { min-height: 62px; }
-  .masthead-note { display: none; }
-  .primary-nav { gap: 0; display: grid; grid-template-columns: repeat(2, 1fr); }
+  .site-header { min-height: 0; display: block; }
+  .wordmark { min-height: 60px; }
+  .primary-nav { gap: 0; display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
   .impact-chain, .scale-grid { grid-template-columns: 1fr; }
-  .nav-item { width: 100%; }
+  .nav-item { width: 100%; min-height: 48px; }
   .nav-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .intro { padding: 38px 0 36px; }
   .intro h1 { font-size: clamp(40px, 12vw, 50px); }

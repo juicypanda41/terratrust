@@ -148,6 +148,16 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **Validation and outcome:** The 2.1 MB generated PNG was converted to a 136 KB WebP; frontend tests, production build, strict UI review, responsive styling, and reduced-motion behavior were rechecked.
 - **Boundaries:** The image is decorative, not a model input, monitored location, satellite evidence, or proof of environmental impact.
 
+### Header simplification
+
+- **Date/time:** 2026-08-09
+- **Tools:** OpenAI Codex and UI/UX Pro Max guidance.
+- **Purpose:** Remove decorative header conventions that the user identified as AI-generated.
+- **Representative prompt:** “Make the top bar feel natural and editorial: remove the circular TT badge, glass pill, rounded frame, and Land-cover verification descriptor while preserving all four routes, active state, queue count, keyboard focus, and mobile behavior.”
+- **Output used:** A single-line desktop wordmark/navigation header and a compact stacked mobile layout.
+- **Validation:** Frontend interaction test, production build, strict UI review, live desktop inspection, and responsive source review.
+- **Boundary:** This is a presentation-only change; navigation state and application functionality were not changed.
+
 ## Where AI was not used
 
 Document human-owned work and the reason it stayed human-led, such as firsthand interviews, final ethical decisions, consent, source verification, judging claims, original team opinions, or final approval.

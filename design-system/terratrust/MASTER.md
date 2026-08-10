@@ -29,7 +29,7 @@ Display headings use Instrument Serif with Georgia fallback. Interface copy uses
 
 ## Structure
 
-- Header: one translucent, blurred instrument bar with four plain navigation destinations.
+- Header: a plain ruled wordmark/navigation row with no badge, descriptor, glass shell, or decorative framing.
 - Overview: viewport-scale product statement over a custom-generated oblique forest photograph. The image is decorative and is never presented as analyzed evidence or a real monitored location.
 - Analyze: stable two-column source/result workspace; atmosphere never competes with task controls.
 - Human verification: ruled operational queue.

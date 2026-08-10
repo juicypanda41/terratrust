@@ -76,3 +76,7 @@ This change maps to Presentation Quality and Technical Execution in `docs/judgin
 ### Forest hero refinement
 
 The initial abstract contour atmosphere was replaced with a project-specific, generated oblique forest image after direct user feedback. The composition concentrates dimensional terrain on the right and preserves dark negative space beneath the headline. A layered CSS scrim maintains text contrast without modifying any product interaction. The source was converted to a 136 KB WebP for the shipped interface; it is decorative, not evidence, and does not represent a named real location.
+
+### Header de-stylization
+
+Direct user feedback identified the rounded glass shell, circular `TT` badge, and uppercase “Land-cover verification” descriptor as generated-looking decoration. They were removed. The header is now a single ruled wordmark/navigation row on desktop and a compact wordmark plus two-column navigation on phones. Routes, active state, keyboard focus, queue count, and 44px touch targets are unchanged.

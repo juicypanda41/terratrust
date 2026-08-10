@@ -190,14 +190,8 @@ function App() {
 
 function Header({ activeView, queueCount, onNavigate }) {
   return (
-    <header className="site-header liquid-glass">
-      <div className="masthead">
-        <button className="wordmark" onClick={() => onNavigate("briefing")} aria-label="TerraTrust home">
-          <span className="wordmark-mark" aria-hidden="true">TT</span>
-          <span>TerraTrust</span>
-        </button>
-        <span className="masthead-note">Land-cover verification</span>
-      </div>
+    <header className="site-header">
+      <button className="wordmark" onClick={() => onNavigate("briefing")} aria-label="TerraTrust home">TerraTrust</button>
       <nav className="primary-nav" aria-label="Primary navigation">
         {NAV_ITEMS.map((item) => (
           <button
