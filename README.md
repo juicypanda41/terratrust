@@ -16,7 +16,7 @@ Sentinel-2 imagery supports land-cover and forest monitoring, but raw classifica
 - Temperature-scaled confidence.
 - Validation-selected abstention threshold.
 - Analyze-tile experience with top-two predictions.
-- Human review queue.
+- Human verification queue.
 - Risk-coverage, calibration, and confusion-matrix evidence.
 - Reproducible training and held-out evaluation.
 - Explicit limitations and decision safeguards.
@@ -72,7 +72,7 @@ On a deterministic held-out EuroSAT RGB test set of 4,050 images:
    .\.venv\Scripts\python.exe -m uvicorn api:app --host 127.0.0.1 --port 8501
    ```
 
-7. Open `http://localhost:8501`. For the fastest demo, choose **Analyze**, select **Ambiguous scene**, run screening, and add the result to the review queue.
+7. Open `http://localhost:8501`. For the fastest demo, choose **Analyze**, select **Ambiguous scene**, run the analysis, and send the result to **Human verification**.
 
 VS Code tasks and debug configurations for these commands are included under `.vscode/`.
 

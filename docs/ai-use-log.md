@@ -92,6 +92,17 @@ Complete one entry for each meaningful AI-assisted component. Keep representativ
 - **Measured outcome:** Removed all Framer Motion components from the rendered interface, reduced the production JavaScript bundle, replaced the three-column analysis layout with one two-column workspace, and reduced strict-review informational findings to 15 with 0 errors and 0 warnings. Model outputs and evidence artifacts were unchanged.
 - **Limitations:** Visual similarity and naturalness remain qualitative. Final approval belongs to the team, and a real assistive-technology pass is still required.
 
+### Human-verification terminology pass
+
+- **Date/time:** 2026-08-09
+- **Tool:** OpenAI Codex
+- **Purpose:** Rename the user-facing review workflow so its human responsibility is immediately clear.
+- **Representative detailed prompt:** “Change the review part to human verification.”
+- **Output used:** Navigation, analysis handoff, queue screen, explanatory copy, responsive navigation styling, tests, and supporting project/demo documentation.
+- **Validation performed:** React interaction test, production build, repository diff check, and user-facing copy scan.
+- **Measured outcome:** The primary workflow is now labeled “Human verification,” while internal API field names and standard evaluation metrics such as `review_rate` remain unchanged for compatibility and reproducibility.
+- **Limitations:** This is a terminology and presentation change; model behavior and measured results did not change.
+
 ## Where AI was not used
 
 Document human-owned work and the reason it stayed human-led, such as firsthand interviews, final ethical decisions, consent, source verification, judging claims, original team opinions, or final approval.

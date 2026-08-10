@@ -14,7 +14,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 const NAV_ITEMS = [
   { id: "briefing", label: "Overview" },
   { id: "screen", label: "Analyze" },
-  { id: "queue", label: "Review" },
+  { id: "queue", label: "Human verification" },
   { id: "evidence", label: "Validation" },
 ];
 
@@ -22,7 +22,7 @@ const PUBLIC_LIMITATIONS = [
   "Classifies whole scenes, not exact boundaries or area.",
   "Assesses one image at a time; it does not claim to detect change.",
   "Current evaluation is regional and requires local validation before deployment.",
-  "Confidence guides review; it never guarantees correctness.",
+  "Confidence guides verification; it never guarantees correctness.",
 ];
 
 const pct = (value, digits = 1) => `${(Number(value) * 100).toFixed(digits)}%`;
@@ -179,7 +179,7 @@ function Header({ activeView, queueCount, onNavigate }) {
           <span className="wordmark-mark" aria-hidden="true">TT</span>
           <span>TerraTrust</span>
         </button>
-        <span className="masthead-note">Land-cover review</span>
+        <span className="masthead-note">Land-cover verification</span>
       </div>
       <nav className="primary-nav" aria-label="Primary navigation">
         {NAV_ITEMS.map((item) => (
@@ -203,16 +203,16 @@ function Overview({ onStart }) {
     <>
       <section className="intro" aria-labelledby="intro-title">
         <p className="section-label">Responsible screening</p>
-        <h1 id="intro-title">Review uncertain land-cover results before they move forward.</h1>
+        <h1 id="intro-title">Verify uncertain land-cover results before they move forward.</h1>
         <div className="intro-bottom">
-          <p>TerraTrust classifies one satellite scene at a time and holds uncertain or unfamiliar images for a person to review.</p>
-          <button className="text-action" onClick={onStart}>Start a review <ArrowRight size={17} aria-hidden="true" /></button>
+          <p>TerraTrust classifies one satellite scene at a time and holds uncertain or unfamiliar images for a person to verify.</p>
+          <button className="text-action" onClick={onStart}>Start an analysis <ArrowRight size={17} aria-hidden="true" /></button>
         </div>
       </section>
       <section className="overview-list" aria-label="How TerraTrust works">
         <div><span>Analyze</span><p>Choose a reference scene or upload an RGB image.</p></div>
-        <div><span>Check</span><p>Review the class, calibrated confidence, and reason.</p></div>
-        <div><span>Route</span><p>Move uncertain or unverified scenes into the review queue.</p></div>
+        <div><span>Check</span><p>Verify the class, calibrated confidence, and reason.</p></div>
+        <div><span>Route</span><p>Move uncertain or unverified scenes to human verification.</p></div>
       </section>
     </>
   );
@@ -223,7 +223,7 @@ function Analyze({ demos, selectedDemo, uploadedFile, previewUrl, fileInput, res
   const imageAlt = selectedDemo ? `${selectedDemo.story}, reference scene labeled ${selectedDemo.display_label}` : `Uploaded scene ${uploadedFile?.name || ""}`;
   return (
     <section aria-labelledby="analyze-title">
-      <PageIntro label="Analyze" title="Land-cover review" description="Choose a reference scene or upload an image. New sources stay in review until their origin is verified." titleId="analyze-title" />
+      <PageIntro label="Analyze" title="Land-cover analysis" description="Choose a reference scene or upload an image. New sources require human verification before they can continue." titleId="analyze-title" />
       <div className="workspace">
         <div className="source-panel">
           <div className="panel-heading"><span>Source</span><span>{uploadedFile ? "Uploaded image" : "Reference scene"}</span></div>
@@ -265,7 +265,7 @@ function EmptyResult() {
     <div className="result-empty">
       <ScanSearch size={22} aria-hidden="true" />
       <h2>No result yet</h2>
-      <p>Choose a scene and run the analysis. The classification, confidence, and review decision will appear here.</p>
+      <p>Choose a scene and run the analysis. The classification, confidence, and verification decision will appear here.</p>
     </div>
   );
 }
@@ -277,7 +277,7 @@ function ResultPanel({ result, onQueue }) {
         <div><span>Land cover</span><h2>{result.predicted_display}</h2></div>
         <div className={result.requires_review ? "decision review" : "decision accept"}>
           {result.requires_review ? <CircleAlert size={15} aria-hidden="true" /> : <Check size={15} aria-hidden="true" />}
-          {result.requires_review ? "Review required" : "Ready to continue"}
+          {result.requires_review ? "Human verification required" : "Ready to continue"}
         </div>
       </div>
       <div className="confidence"><strong>{pct(result.confidence)}</strong><span>calibrated confidence</span></div>
@@ -298,7 +298,7 @@ function ResultPanel({ result, onQueue }) {
           ))}
         </div>
       </div>
-      {result.requires_review && <button className="queue-action" onClick={onQueue}><FileCheck2 size={17} aria-hidden="true" />Add to review queue</button>}
+      {result.requires_review && <button className="queue-action" onClick={onQueue}><FileCheck2 size={17} aria-hidden="true" />Send to human verification</button>}
     </div>
   );
 }
@@ -306,7 +306,7 @@ function ResultPanel({ result, onQueue }) {
 function ReviewQueue({ items, onAnalyze, onRemove }) {
   return (
     <section aria-labelledby="review-title">
-      <PageIntro label="Review" title="Review queue" description="Scenes that need a person stay here with their source, confidence, and review reason." titleId="review-title" />
+      <PageIntro label="Queue" title="Human verification" description="Scenes that need a person stay here with their source, confidence, and verification reason." titleId="review-title" />
       {items.length === 0 ? (
         <div className="quiet-empty">
           <FileCheck2 size={22} aria-hidden="true" />
@@ -316,13 +316,13 @@ function ReviewQueue({ items, onAnalyze, onRemove }) {
         </div>
       ) : (
         <div className="queue-list">
-          <div className="queue-heading"><span>{items.length} waiting</span><span>Human review</span></div>
+          <div className="queue-heading"><span>{items.length} waiting</span><span>Awaiting verification</span></div>
           {items.map((item) => (
             <article key={item.id} className="queue-item">
               <img src={item.preview} width="88" height="88" alt={`Queued satellite scene ${item.source}`} />
               <div className="queue-copy"><span>{item.source}</span><h2>{item.result.predicted_display}</h2><p>{item.result.review_reason}</p></div>
               <div className="queue-confidence"><strong>{pct(item.result.confidence)}</strong><span>confidence</span></div>
-              <button className="icon-button" onClick={() => onRemove(item.id)} aria-label={`Remove ${item.source} from review queue`}><X size={19} aria-hidden="true" /></button>
+              <button className="icon-button" onClick={() => onRemove(item.id)} aria-label={`Remove ${item.source} from human verification`}><X size={19} aria-hidden="true" /></button>
             </article>
           ))}
         </div>
@@ -346,7 +346,7 @@ function Validation({ data }) {
         <article className="validation-section curve-section">
           <SectionHeading title="Accuracy and coverage" detail={`Threshold ${pct(metrics.threshold, 0)}`} />
           <RiskCurve rows={riskCoverage} threshold={metrics.threshold} />
-          <p className="note">A stricter threshold sends more scenes to review. The complete policy also checks image quality.</p>
+          <p className="note">A stricter threshold sends more scenes to human verification. The complete policy also checks image quality.</p>
         </article>
         <article className="validation-section calibration-section">
           <SectionHeading title="Calibration" detail={`Held-out test, n=${metrics.test_count.toLocaleString()}`} />
@@ -396,7 +396,7 @@ function RiskCurve({ rows, threshold }) {
     <div className="risk-curve">
       <svg viewBox="0 0 600 190" role="img" aria-labelledby="risk-title risk-desc">
         <title id="risk-title">Accepted-case accuracy as the confidence threshold increases</title>
-        <desc id="risk-desc">Accepted-case accuracy rises as a stricter confidence threshold sends more cases to review.</desc>
+        <desc id="risk-desc">Accepted-case accuracy rises as a stricter confidence threshold sends more cases to human verification.</desc>
         <line x1="18" x2="582" y1="166" y2="166" />
         <line x1="18" x2="18" y1="18" y2="166" />
         <line className="target-line" x1="18" x2="582" y1="141" y2="141" />

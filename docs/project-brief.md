@@ -46,7 +46,7 @@ The user's decision is concrete: **Which tiles are safe to classify automaticall
 - Full class-probability comparison and local inference time.
 - Unverified uploaded imagery always remains in review.
 
-### Screen 3 - Human Review Queue
+### Screen 3 - Human Verification
 
 - Preserve the source, prediction, confidence, and review reason for each flagged scene.
 - Let the reviewer remove a completed item from the local demo queue.

@@ -35,7 +35,7 @@ Spacing follows a 4/8px rhythm. The page width is `min(100% - 40px, 1240px)` on 
 - Navigation: four plain text destinations under the masthead.
 - Overview: one concise serif statement, one text action, and three ruled workflow lines.
 - Analyze: one bordered two-column workspace. Source and controls stay left; the result stays right.
-- Review: a ruled list, never a stack of floating cards.
+- Human verification: a ruled list, never a stack of floating cards.
 - Validation: one metric strip followed by report-like sections and a native HTML table.
 - Footer: short product boundary statement.
 
